@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노경 3.0 추진전략 및 실행과제 | 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#0f172a;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px}
+.ppt-outer{width:100%;max-width:1280px}
+.ppt-frame{width:100%;position:relative;padding-bottom:56.25%;background:white;box-shadow:0 20px 60px rgba(0,0,0,.6);border-radius:6px;overflow:hidden}
+.slide{display:none;position:absolute;top:0;left:0;width:100%;height:100%;flex-direction:column;overflow:hidden}
+.slide.active{display:flex}
+.s-head{background:linear-gradient(135deg,#1B3A6B,#1e4d9b);color:white;padding:1.1% 2.5%;display:flex;align-items:center;justify-content:space-between;min-height:10%;flex-shrink:0}
+.s-title{font-size:1.25vw;font-weight:700;letter-spacing:-.3px;line-height:1.3;flex:1}
+.s-meta{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.s-cat{font-size:.55vw;opacity:.7}
+.s-num{font-size:.55vw;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px}
+.s-body{flex:1;padding:1% 2.5%;display:flex;flex-direction:column;overflow:hidden;gap:.6%}
+.key-msg{background:#EEF4FF;border-left:3px solid #1B3A6B;padding:.4% 1%;font-size:.75vw;font-weight:600;color:#1B3A6B;border-radius:0 3px 3px 0;flex-shrink:0}
+.s-foot{padding:.25% 2.5%;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;font-size:.52vw;color:#94a3b8;flex-shrink:0}
+.nav-wrap{display:flex;align-items:center;gap:12px;margin-top:14px;width:100%;max-width:1280px;justify-content:center;flex-wrap:wrap}
+.nav-btn{background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.25);padding:7px 18px;border-radius:4px;cursor:pointer;font-size:.85rem;font-family:inherit;transition:background .2s}
+.nav-btn:hover:not(:disabled){background:rgba(255,255,255,.2)}
+.nav-btn:disabled{opacity:.3;cursor:default}
+.nav-counter{color:#cbd5e1;font-size:.8rem;min-width:80px;text-align:center}
+.slide-dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:500px}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:background .2s}
+.dot.active{background:#60a5fa}
+.dot:hover{background:rgba(255,255,255,.5)}
+.kb{color:#64748b;font-size:.7rem;margin-top:6px}
+/* layout helpers */
+.row{display:flex;gap:1%;flex:1}
+.col{display:flex;flex-direction:column;gap:.6%}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1%;flex:1}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1%;flex:1}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1%}
+.g1-2{display:grid;grid-template-columns:1fr 2fr;gap:1%;flex:1}
+.g2-1{display:grid;grid-template-columns:2fr 1fr;gap:1%;flex:1}
+.g3-2{display:grid;grid-template-columns:3fr 2fr;gap:1%;flex:1}
+.flex1{flex:1}
+/* cards */
+.card{background:white;border:1px solid #e2e8f0;border-radius:6px;padding:.8% 1.2%}
+.card-navy{background:#1B3A6B;color:white;border-radius:6px;padding:.8% 1.2%}
+.card-blue{background:#1e40af;color:white;border-radius:6px;padding:.8% 1.2%}
+.card-teal{background:#0e7490;color:white;border-radius:6px;padding:.8% 1.2%}
+.card-amber{background:linear-gradient(135deg,#D97706,#F59E0B);color:white;border-radius:6px;padding:.8% 1.2%}
+.card-light{background:#f0f6ff;border:1px solid #bfdbfe;border-radius:6px;padding:.8% 1.2%}
+.card-amber-light{background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:.8% 1.2%}
+.card-green{background:#f0fdf4;border:1px solid #86efac;border-radius:6px;padding:.8% 1.2%}
+.card-red{background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;padding:.8% 1.2%}
+.card-gray{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:.8% 1.2%}
+/* typography */
+.t-xs{font-size:.58vw}.t-sm{font-size:.68vw}.t-md{font-size:.78vw}.t-lg{font-size:.9vw}.t-xl{font-size:1.05vw}.t-xxl{font-size:1.3vw}
+.fw7{font-weight:700}.fw6{font-weight:600}
+.c-navy{color:#1B3A6B}.c-blue{color:#1e40af}.c-amber{color:#92400e}.c-green{color:#065f46}.c-red{color:#991b1b}.c-gray{color:#64748b}.c-white{color:white}
+/* bullets */
+ul.bul{list-style:none;padding:0}
+ul.bul li{font-size:.68vw;color:#334155;padding:.2% 0 .2% 1.1%;position:relative;line-height:1.4}
+ul.bul li::before{content:"▪";color:#1B3A6B;position:absolute;left:0;font-size:.6vw;top:.25%}
+ul.bul.sm li{font-size:.6vw}
+ul.bul.lg li{font-size:.75vw}
+/* section title */
+.sec{font-size:.7vw;font-weight:700;color:#1B3A6B;border-bottom:2px solid #1B3A6B;padding-bottom:.2%;margin-bottom:.5%;flex-shrink:0}
+/* badge */
+.bd{display:inline-block;font-size:.52vw;padding:0 5px;border-radius:8px;font-weight:600;vertical-align:middle;margin-left:3px}
+.bd-b{background:#dbeafe;color:#1d4ed8}
+.bd-a{background:#fef3c7;color:#92400e}
+.bd-r{background:#fee2e2;color:#991b1b}
+.bd-g{background:#d1fae5;color:#065f46}
+.bd-gr{background:#f1f5f9;color:#475569}
+/* exec summary cards */
+.ec-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1%;flex:1}
+.ec-card{border-radius:8px;padding:1.5% 2%;display:flex;flex-direction:column;gap:.4%}
+.ec-card .ec-num{font-size:2vw;font-weight:900;opacity:.2;line-height:1}
+.ec-card .ec-ttl{font-size:.85vw;font-weight:700;line-height:1.3}
+.ec-card .ec-desc{font-size:.65vw;line-height:1.5;opacity:.88}
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:.62vw}
+.tbl th{background:#1B3A6B;color:white;padding:.35% .7%;text-align:center;font-weight:600}
+.tbl td{padding:.3% .7%;border:1px solid #e2e8f0;vertical-align:top;color:#334155;line-height:1.35}
+.tbl tr:nth-child(even) td{background:#f8fafc}
+.tbl th.tl,.tbl td.tl{text-align:left}
+.tbl td.tc{text-align:center}
+.tbl td.nb{background:#EEF4FF;font-weight:600;color:#1B3A6B}
+/* as-is to-be */
+.at-wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:.8%;flex:1;align-items:stretch}
+.at-box{border-radius:6px;padding:1% 1.5%}
+.at-asis{background:#f8fafc;border:1px solid #cbd5e1}
+.at-tobe{background:#eff6ff;border:1px solid #bfdbfe}
+.at-mid{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px}
+.at-ttl{font-size:.65vw;font-weight:700;padding:.2% .7%;border-radius:3px;display:inline-block;margin-bottom:.5%}
+.at-asis .at-ttl{background:#e2e8f0;color:#475569}
+.at-tobe .at-ttl{background:#1B3A6B;color:white}
+/* timeline */
+.tl-wrap{flex:1;position:relative;display:flex;padding-top:10%}
+.tl-line{position:absolute;top:25%;left:4%;right:4%;height:4px;background:linear-gradient(to right,#1B3A6B,#2563EB,#F59E0B);border-radius:2px}
+.tl-phase{flex:1;display:flex;flex-direction:column;align-items:center;position:relative}
+.tl-dot{width:1.1vw;height:1.1vw;border-radius:50%;background:white;border:3px solid #1B3A6B;z-index:2;position:absolute;top:calc(25% - .55vw - 2px)}
+.tl-body{margin-top:32%;width:90%;text-align:center}
+.tl-ph{font-size:.75vw;font-weight:700;color:#1B3A6B}
+.tl-pd{font-size:.58vw;color:#64748b;margin:.2% 0}
+.tl-ev{font-size:.58vw;color:#334155;line-height:1.4;text-align:left}
+/* operating model */
+.om-wrap{display:flex;align-items:stretch;gap:1%;flex:1}
+.om-box{flex:1;border-radius:8px;padding:1% 1.5%;display:flex;flex-direction:column;gap:.5%}
+.om-arr{display:flex;align-items:center;justify-content:center;font-size:1.5vw;color:#1B3A6B;font-weight:700}
+/* heatmap */
+.hm-wrap{flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden}
+.hm-hdr{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:2px;flex-shrink:0}
+.hm-row{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:2px;flex:1}
+.hm-c{border-radius:3px;padding:.4% .6%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.58vw;font-weight:600;line-height:1.3}
+.hm-lbl{font-size:.65vw;font-weight:600;color:#1B3A6B;background:#f0f4ff;justify-content:flex-start;padding-left:.8%}
+.hm-hd{background:#1B3A6B;color:white}
+.hm-hi{background:#1B3A6B;color:white}
+.hm-mi{background:#3b82f6;color:white}
+.hm-lo{background:#bfdbfe;color:#1e40af}
+.hm-em{background:#f8fafc;color:#94a3b8}
+/* phase cards */
+.pc{border-radius:6px;overflow:hidden;display:flex;flex-direction:column;flex:1}
+.pc-h{padding:.4% 1%;font-size:.62vw;font-weight:700}
+.pc-b{padding:.5% 1%;flex:1}
+.pc-s .pc-h{background:#fef3c7;color:#78350f}
+.pc-s .pc-b{background:#fffbeb;border:1px solid #fde68a;border-top:none}
+.pc-m .pc-h{background:#dbeafe;color:#1e3a8a}
+.pc-m .pc-b{background:#eff6ff;border:1px solid #bfdbfe;border-top:none}
+.pc-l .pc-h{background:#d1fae5;color:#064e3b}
+.pc-l .pc-b{background:#f0fdf4;border:1px solid #86efac;border-top:none}
+/* ksf cols */
+.ksf-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1%;flex:1}
+.ksf-col{border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.ksf-head{padding:.8% 1.2%;text-align:center;font-size:.8vw;font-weight:700;color:white}
+.ksf-body{flex:1;padding:.8% 1.2%;background:white;border:1px solid #e2e8f0;border-top:none}
+/* radar */
+.radar-wrap{flex:1;display:flex;gap:1%;align-items:stretch}
+.radar-canvas-box{flex:1.2;display:flex;align-items:center;justify-content:center;position:relative}
+.radar-table-box{flex:1;display:flex;flex-direction:column;gap:.5%}
+/* conclusion bar */
+.concl{background:linear-gradient(135deg,#1B3A6B,#1e4d9b);color:white;border-radius:6px;padding:.6% 1.2%;font-size:.75vw;font-weight:700;text-align:center;flex-shrink:0}
+/* highlight box */
+.hl-amber{background:linear-gradient(135deg,#D97706,#F59E0B);color:white;border-radius:8px;padding:1% 1.5%;text-align:center}
+.hl-navy{background:#1B3A6B;color:white;border-radius:6px;padding:.6% 1.2%;font-size:.75vw;font-weight:700}
+/* stat bar */
+.stat-bar{display:flex;align-items:center;gap:1%;margin:.3% 0}
+.stat-fill{height:.9vw;border-radius:3px;display:flex;align-items:center;padding:0 .4%;font-size:.55vw;color:white;font-weight:600}
+/* divider */
+.divider{height:1px;background:#e2e8f0;margin:.4% 0;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="ppt-outer">
+<div class="ppt-frame" id="pptFrame">
+
+<!-- SLIDE 0: Executive Summary -->
+<div class="slide active" id="s0">
+<div class="s-head">
+  <div class="s-title">노경 3.0: 리소스·마인드·시스템의 동시 전환이 지금 필요하다</div>
+  <div class="s-meta"><span class="s-cat">Executive Summary</span><span class="s-num">0 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">노사관계 관리 범위의 급격한 확대에 비해 현재 체계는 구조적으로 한계에 처해 있다</div>
+  <div class="ec-grid">
+    <div class="ec-card" style="background:#1B3A6B;color:white">
+      <div class="ec-num">①</div>
+      <div class="ec-ttl">관리 범위의 이중 확대</div>
+      <div class="ec-desc">국내: 현장직 중심 → 사무직·개별관계까지 확대<br>해외: HQ 지원형 → 법인 기반 상시 운영형으로 전환 필요<br>인적구성 사무직 10,000명 vs 현장직 2,000명, 건전 대의기구 부재</div>
+    </div>
+    <div class="ec-card" style="background:#1e40af;color:white">
+      <div class="ec-num">②</div>
+      <div class="ec-ttl">대외 환경의 구조적 변화</div>
+      <div class="ec-desc">노조법 2·3조(노란봉투법) 2026년 3월 일부 시행<br>삼성전자 등 대기업 사무직 노조 급확대<br>UAW의 EV배터리 공장 조직화 (Ultium Cells 오하이오 2023 협약)</div>
+    </div>
+    <div class="ec-card" style="background:#0e7490;color:white">
+      <div class="ec-num">③</div>
+      <div class="ec-ttl">현행 체계의 대응 한계</div>
+      <div class="ec-desc">노무 인력 16명 수준 — 국내+글로벌 대응 범위 현저히 초과<br>해외 법인 노경 경험·가이드라인 부재, 사무직 조직화 대응 체계 미비<br>현재 구조로는 <b>사후 진화(fire-fighting)</b>에 머무를 우려</div>
+    </div>
+    <div class="ec-card" style="background:linear-gradient(135deg,#D97706,#F59E0B);color:white">
+      <div class="ec-num">④</div>
+      <div class="ec-ttl">실행의 핵심: 3대 동시 전환</div>
+      <div class="ec-desc"><b>리소스</b>: 역량·조직 재편 (역할 재설계 + pool 구축)<br><b>마인드</b>: 경영진·HR의 노경 인식 전환<br><b>시스템</b>: AX 기반 디지털화 + 표준화 + AI 대응 체계</div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>본 자료는 내부 메모 기반 분석과 외부 공개자료를 통합 작성 / [내부 관찰] [시나리오] 항목은 별도 표기</span><span>노경 3.0 추진전략 | 2025</span></div>
+</div>
+
+<!-- SLIDE 1: 대내 배경 -->
+<div class="slide" id="s1">
+<div class="s-head">
+  <div class="s-title">사무직 중심 인적구조에서 조직화 리스크와 리더십 공백이 동시에 커지고 있다</div>
+  <div class="s-meta"><span class="s-cat">추진배경 1-1</span><span class="s-num">1 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">현장직 중심 노경 체계가 사무직 10,000명·해외 생산거점 확대라는 현실을 따라가지 못하고 있다</div>
+  <div class="g2" style="flex:1">
+    <div class="col">
+      <div class="sec">국내 — 사무직 이슈 부상</div>
+      <div class="card-light" style="flex-shrink:0">
+        <div class="t-sm fw6 c-navy" style="margin-bottom:.4%">인적 구성</div>
+        <div class="stat-bar">
+          <span class="t-xs c-gray" style="min-width:30%">사무직</span>
+          <div class="stat-fill" style="width:83%;background:#1B3A6B">10,000명 (83%)</div>
+        </div>
+        <div class="stat-bar">
+          <span class="t-xs c-gray" style="min-width:30%">현장직</span>
+          <div class="stat-fill" style="width:17%;background:#64748b">2,000명 (17%)</div>
+        </div>
+      </div>
+      <ul class="bul">
+        <li>현장직: 노동조합 중심 소통 채널 운영 → 비교적 체계적</li>
+        <li>사무직: 건전한 대의기구 <b>부재</b>, 익명 앱(블라인드 등)을 통한 불만 표출 증가</li>
+        <li>회사 제도·정책은 이미 사무직 중심으로 변화 중 → 현장 노조와 긴장 발생</li>
+        <li>조직책임자의 노경 관리 역량 및 관심도 <b>미흡</b></li>
+      </ul>
+      <div class="card-amber-light">
+        <div class="t-xs fw6" style="color:#78350f;margin-bottom:.3%">⚠ 내부 관찰 / 시나리오</div>
+        <ul class="bul sm">
+          <li><span class="bd bd-a">[내부 관찰]</span> 2024년 경영성과급 관련 트럭시위 발생</li>
+          <li><span class="bd bd-a">[시나리오]</span> 2026년 성과급 지급 후 사무직 노조 확대 가능성</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="sec">해외 — 글로벌 ER 공백</div>
+      <ul class="bul">
+        <li>글로벌 생산거점 지속 확대 → 현지 노동 이슈 상시화</li>
+        <li>UAW 등 외부 노조의 EV배터리 공장 조직화 시도 확산</li>
+        <li>현지 노동법·비자·지역사회 이슈에 대한 경험·지식 부족</li>
+        <li>국내 HQ의 ad-hoc 지원 방식으로는 <b>상시 이슈 대응 불가</b></li>
+        <li>현지 리더·주재원의 노경 역량 미확보 상태</li>
+      </ul>
+      <div class="card-red">
+        <div class="t-xs fw6" style="color:#991b1b;margin-bottom:.3%">🔴 핵심 리스크</div>
+        <ul class="bul sm">
+          <li>사무직 노조 설립 시 복수노조·교섭창구단일화 이슈 즉각 발생</li>
+          <li>해외 노조 활동 대응 실패 시 생산 차질 → 매출 직접 타격</li>
+          <li>현장·사무 노조 동시 교섭 시 <b>협상력·자원 분산</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>[내부 관찰] [시나리오] 표기 항목은 내부 인식 기반이며 외부 검증 대상임</span><span>추진배경 1-1 | 대내 현황</span></div>
+</div>
+
+<!-- SLIDE 2: 대외 배경 -->
+<div class="slide" id="s2">
+<div class="s-head">
+  <div class="s-title">정책·타사 변화가 전통적 현장 중심 노경 모델의 유효성을 근본적으로 흔들고 있다</div>
+  <div class="s-meta"><span class="s-cat">추진배경 1-2</span><span class="s-num">2 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">국내외 노동환경 변화의 속도와 범위가 기존 대응 방식의 한계를 뚜렷이 드러내고 있다</div>
+  <div class="row" style="flex-shrink:0;gap:1%;margin-bottom:.6%">
+    <div class="card-amber-light" style="flex:1">
+      <div class="sec" style="border-color:#D97706;color:#78350f">타사 사례</div>
+      <ul class="bul sm">
+        <li><b>삼성전자</b>: 전국삼성전자노조('24년 첫 파업, 조합원 3만명 ↑) — 사무직·연구직 포함 급확대, 산업 전반 파급 효과</li>
+        <li><b>Ultium Cells LLC</b>(GM-LG에너지솔루션 JV, 오하이오): 2023년 UAW 협약 체결, 시간당 $21→$42 단계적 인상, EV 배터리 산업 표준 설정</li>
+        <li><b>HMGMA</b>(현대차 조지아): 2024년 UAW 조직화 시도, 이민자 노동자·지역사회 이슈 부각</li>
+      </ul>
+    </div>
+  </div>
+  <div style="flex:1;overflow:hidden">
+    <table class="tbl" style="height:100%">
+      <tr><th class="tl" style="width:16%">정책 이슈</th><th style="width:22%">현황</th><th style="width:22%">방향</th><th style="width:25%">시사점</th><th style="width:15%">시급도</th></tr>
+      <tr><td class="nb">노조법 2·3조<br>(노란봉투법)</td><td>'24년 재추진, '26.3 일부 시행</td><td>하청·특수고용 노조 교섭권 확대</td><td>교섭 상대방 범위 확대 리스크</td><td class="tc"><span class="bd bd-r">긴급</span></td></tr>
+      <tr><td class="nb">포괄임금제 금지</td><td>근로시간 기록의무 도입 논의</td><td>실근로시간 관리 의무화 방향</td><td>사무직 초과근무 리스크 노출</td><td class="tc"><span class="bd bd-r">단기</span></td></tr>
+      <tr><td class="nb">정년연장·계속고용</td><td>60세→65세 단계적 논의</td><td>'33년까지 의무화 방향 검토</td><td>인건비·인력구조 재편 필요</td><td class="tc"><span class="bd bd-a">중기</span></td></tr>
+      <tr><td class="nb">실근로시간 단축</td><td>주 4.5일제 등 사회적 논의</td><td>근로시간 단축 로드맵 추진</td><td>생산성·운영방식 재설계 압력</td><td class="tc"><span class="bd bd-a">중기</span></td></tr>
+      <tr><td class="nb">동일가치노동<br>동일임금</td><td>ILO 기준 준용 입법 논의</td><td>직무급 전환 압력 증가</td><td>임금체계 전면 개편 필요성</td><td class="tc"><span class="bd bd-a">중기</span></td></tr>
+      <tr><td class="nb">초기업교섭 활성화</td><td>산별교섭 확산 시도</td><td>업종별 공동교섭 압력</td><td>개별사 협상력 약화 우려</td><td class="tc"><span class="bd bd-g">장기</span></td></tr>
+    </table>
+  </div>
+  <div class="concl">결론: 현장직·집단적 노사관계 중심의 전통 노경 모델은 이미 한계 국면에 진입하였다</div>
+</div>
+<div class="s-foot"><span>출처: 고용노동부, 한국노동연구원, 연합뉴스, Reuters 등 공개자료 종합 / 기준: 2025~2026년</span><span>추진배경 1-2 | 대외 환경</span></div>
+</div>
+
+<!-- SLIDE 3: 국내 노사관계 전망 -->
+<div class="slide" id="s3">
+<div class="s-head">
+  <div class="s-title">국내 노사관계의 중심축은 현장직에서 사무직·개별관계로 이동하고 있다</div>
+  <div class="s-meta"><span class="s-cat">노사관계 전망 2-1</span><span class="s-num">3 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">집단적 노사관계 + 개별 노사관계의 동시 관리 체계 없이는 예방형 노경이 불가능하다</div>
+  <div class="at-wrap">
+    <div class="at-box at-asis">
+      <div class="at-ttl">현재 (As-is)</div>
+      <ul class="bul">
+        <li>현장직 중심 이슈 집중 관리</li>
+        <li>집단적 노사관계 위주 대응</li>
+        <li>사후 대응형 (이슈 발생 후 수습)</li>
+        <li>현장노조 대응 중심 체계</li>
+        <li>사무직 노경 채널·체계 미비</li>
+        <li>조직책임자 역할 불명확</li>
+      </ul>
+      <div style="margin-top:.6%">
+        <div class="t-xs fw6 c-gray">현재 구조의 한계</div>
+        <div class="card-red" style="margin-top:.3%">
+          <ul class="bul sm">
+            <li>사무직 불만이 익명 채널로만 표출</li>
+            <li>이슈 발생 시 대응 주체 불명확</li>
+            <li>글로벌 이슈 ad-hoc 대응 한계</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="at-mid">
+      <div style="font-size:1.8vw;color:#1B3A6B">→</div>
+      <div style="font-size:.55vw;color:#64748b;text-align:center">촉발 요인</div>
+      <ul class="bul sm" style="text-align:left">
+        <li>사무직 노조 설립</li>
+        <li>복수노조 환경 심화</li>
+        <li>근로자대표 역할 확대</li>
+        <li>개별 고충 이슈 증가</li>
+        <li>노조법 2·3조 시행</li>
+      </ul>
+    </div>
+    <div class="at-box at-tobe">
+      <div class="at-ttl">목표 (To-be)</div>
+      <ul class="bul">
+        <li>사무직·개별관계 이슈 병행 관리 확대</li>
+        <li>집단적 + 개별 노사관계 <b>동시 관리</b></li>
+        <li>예방형 + 상시 모니터링 체계</li>
+        <li>조직책임자 참여형 / 사업부 HR 연계형</li>
+        <li>사무노조·복수노조 대응 체계 구축</li>
+        <li>공정대표의무·과반수노조 대응 역량 확보</li>
+      </ul>
+      <div style="margin-top:.6%">
+        <div class="t-xs fw6 c-blue">핵심 변화 포인트</div>
+        <div class="card-light" style="margin-top:.3%">
+          <ul class="bul sm">
+            <li>노사협의회·근로자대표 역할 선제 설계</li>
+            <li>교섭창구단일화·공정대표의무 사전 준비</li>
+            <li>사업부 HR이 1차 노경 대응 주체로</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>사무노조 출범 시 복수노조·교섭창구단일화·공정대표의무·과반수노조 이슈 연쇄 발생 가능</span><span>노사관계 전망 2-1 | 국내</span></div>
+</div>
+
+<!-- SLIDE 4: 해외 노사관계 전망 -->
+<div class="slide" id="s4">
+<div class="s-head">
+  <div class="s-title">해외 노사관리는 '지원형 Global ER'에서 '운영형 Global ER'로 즉시 전환되어야 한다</div>
+  <div class="s-meta"><span class="s-cat">노사관계 전망 2-2</span><span class="s-num">4 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">현지 노동법·노조 활동·지역사회 이슈에 상시 대응하는 체계 없이 글로벌 생산 안정성을 확보할 수 없다</div>
+  <div class="card-amber-light" style="flex-shrink:0;margin-bottom:.5%">
+    <div class="sec" style="border-color:#D97706;color:#78350f">해외 노사 이슈 주요 사례 (외부 공개자료 기반)</div>
+    <div class="g3">
+      <div>
+        <div class="t-xs fw6" style="color:#78350f">Ultium Cells (미국 오하이오)</div>
+        <ul class="bul sm"><li>GM-LG에너지솔루션 JV</li><li>2023년 UAW 협약 체결</li><li>시간당 $21→$42 단계적 인상</li><li>EV 배터리 업계 임금 기준 설정</li></ul>
+      </div>
+      <div>
+        <div class="t-xs fw6" style="color:#78350f">HMGMA (미국 조지아)</div>
+        <ul class="bul sm"><li>2024년 UAW 조직화 캠페인 시도</li><li>이민자 노동자 권익 이슈 부각</li><li>지역사회 고용 기대치 vs 실제 채용 간극</li><li>현지 정치·커뮤니티 압력</li></ul>
+      </div>
+      <div>
+        <div class="t-xs fw6" style="color:#78350f">유럽 배터리 공장</div>
+        <ul class="bul sm"><li>헝가리·폴란드 등 현지 노동법 차이</li><li>작업환경·안전 기준 이슈</li><li>현지 노조 설립 움직임</li><li>EU 공급망 실사 지침(CSDD) 적용</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="at-wrap" style="flex:1">
+    <div class="at-box at-asis">
+      <div class="at-ttl">현재 (As-is) — 지원형 Global ER</div>
+      <ul class="bul">
+        <li>국내 HQ 중심 지원 체계</li>
+        <li>현안 발생 시 ad-hoc 대응</li>
+        <li>현지 HR·주재원 노경 역량 미확보</li>
+        <li>글로벌 표준 기준·가이드라인 부재</li>
+        <li>이슈 인지 지연 → 대응 후행</li>
+      </ul>
+    </div>
+    <div class="at-mid">
+      <div style="font-size:1.8vw;color:#1B3A6B">→</div>
+      <div style="font-size:.55vw;color:#64748b;text-align:center;margin:.3% 0">전환 필요</div>
+      <div class="bd bd-r" style="font-size:.55vw">즉시</div>
+    </div>
+    <div class="at-box at-tobe">
+      <div class="at-ttl">목표 (To-be) — 운영형 Global ER</div>
+      <ul class="bul">
+        <li>법인/사이트 기반 상시 노경관리 체계</li>
+        <li>현지 리더·주재원·HR 공통 역량 확보</li>
+        <li>Global Standard + Local Rule 이원 체계</li>
+        <li>HQ CoE → Regional Hub → Site 실행 구조</li>
+        <li>상시 모니터링 + 조기 에스컬레이션</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>출처: Reuters, UAW 협약 공개문서, Ultium Cells 노동협약(2023), 현지 언론보도 / 기준: 2023~2025년</span><span>노사관계 전망 2-2 | 해외</span></div>
+</div>
+
+<!-- SLIDE 5: 노경 1.0→3.0 Evolution Timeline -->
+<div class="slide" id="s5">
+<div class="s-head">
+  <div class="s-title">노경 3.0은 집단·개별 국내관계와 글로벌 ER을 통합한 새로운 운영 패러다임이다</div>
+  <div class="s-meta"><span class="s-cat">노경 3.0 정의 3-1</span><span class="s-num">5 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">각 단계별 환경 변화에 대응하며 진화해온 노경 체계가 이제 3.0 전환점에 서 있다</div>
+  <div class="tl-wrap">
+    <div class="tl-line"></div>
+    <div class="tl-phase">
+      <div class="tl-dot" style="border-color:#475569"></div>
+      <div class="tl-body">
+        <div class="tl-ph" style="color:#475569">노경 1.0</div>
+        <div class="tl-pd">'20.12 ~ '22.2</div>
+        <div class="card-gray" style="margin-top:.5%;text-align:left">
+          <div class="t-xs fw6 c-gray" style="margin-bottom:.3%">국내 현장직 중심</div>
+          <div class="tl-ev">
+            ▪ 노동조합 설립 초기 대응<br>
+            ▪ 단체교섭 기반 구축<br>
+            ▪ 현장 노사협의회 운영 시작<br>
+            ▪ 현장 분규 예방 활동
+          </div>
+        </div>
+        <div class="t-xs c-gray" style="margin-top:.5%;font-style:italic">"현장 중심 모델 정착"</div>
+      </div>
+    </div>
+    <div class="tl-phase">
+      <div class="tl-dot" style="border-color:#2563EB"></div>
+      <div class="tl-body">
+        <div class="tl-ph" style="color:#2563EB">노경 2.0</div>
+        <div class="tl-pd">'22.2 ~ '24.12</div>
+        <div class="card-light" style="margin-top:.5%;text-align:left">
+          <div class="t-xs fw6 c-blue" style="margin-bottom:.3%">국내 현장+사무 집단적 ER</div>
+          <div class="tl-ev">
+            ▪ 사무직 이슈 본격 부상<br>
+            ▪ <span class="bd bd-a">[내부관찰]</span> '24년 트럭시위<br>
+            ▪ 복수노조 환경 대응 시작<br>
+            ▪ 노경 기획·협력·운영 조직 분화
+          </div>
+        </div>
+        <div class="t-xs c-gray" style="margin-top:.5%;font-style:italic">"사무직 이슈 본격화"</div>
+      </div>
+    </div>
+    <div class="tl-phase">
+      <div class="tl-dot" style="border-color:#D97706;background:#FEF9E7"></div>
+      <div class="tl-body">
+        <div class="tl-ph" style="color:#D97706">노경 3.0</div>
+        <div class="tl-pd">'25 ~ (현재 진입)</div>
+        <div class="card-amber-light" style="margin-top:.5%;text-align:left">
+          <div class="t-xs fw6" style="color:#78350f;margin-bottom:.3%">국내 집단+개별 + Global ER</div>
+          <div class="tl-ev">
+            ▪ 사무직 노조 확대 대응 체계<br>
+            ▪ 해외 법인 상시 ER 구축<br>
+            ▪ AX 기반 노경 시스템 도입<br>
+            ▪ <span class="bd bd-a">[시나리오]</span> AI 대응 플랫폼
+          </div>
+        </div>
+        <div class="t-xs" style="color:#D97706;margin-top:.5%;font-style:italic;font-weight:600">"글로벌+개별 동시 대응"</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>[내부 관찰] [시나리오] 표기 항목은 내부 인식 기반이며 외부 검증 대상임</span><span>노경 3.0 정의 3-1 | Evolution</span></div>
+</div>
+
+<!-- SLIDE 6: 노경 3.0 지향점 -->
+<div class="slide" id="s6">
+<div class="s-head">
+  <div class="s-title">노경 3.0 지향점: Glocalization·현장완결형·예방형·데이터 기반 통합 운영</div>
+  <div class="s-meta"><span class="s-cat">노경 3.0 정의 3-2</span><span class="s-num">6 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">HQ CoE가 정책·기준을 설계하고, Regional Hub가 허브 역할을 하며, Site가 자체 완결 실행하는 3층 구조</div>
+  <div class="g4" style="flex-shrink:0;margin-bottom:.6%">
+    <div class="card-navy"><div class="t-xs fw6 c-white">🌐 Glocalization</div><div class="t-xs c-white" style="opacity:.85;margin-top:.2%">글로벌 기준 + 현지 적용</div></div>
+    <div class="card-blue"><div class="t-xs fw6 c-white">🏭 현장완결형</div><div class="t-xs c-white" style="opacity:.85;margin-top:.2%">Site-based End-to-End</div></div>
+    <div class="card-teal"><div class="t-xs fw6 c-white">🛡 예방형·상시형</div><div class="t-xs c-white" style="opacity:.85;margin-top:.2%">데이터 기반 선제 대응</div></div>
+    <div class="card-amber"><div class="t-xs fw6 c-white">⚖ 집단+개별 관리</div><div class="t-xs c-white" style="opacity:.85;margin-top:.2%">동시 이중 관리 체계</div></div>
+  </div>
+  <div class="sec">운영 모델 (Operating Model)</div>
+  <div class="om-wrap">
+    <div class="om-box" style="background:#1B3A6B;color:white">
+      <div class="t-sm fw7 c-white" style="text-align:center;margin-bottom:.5%">HQ CoE</div>
+      <div class="t-xs c-white" style="opacity:.75;text-align:center;margin-bottom:.6%">전략·정책·기준 설계</div>
+      <div class="divider" style="background:rgba(255,255,255,.2)"></div>
+      <ul class="bul sm" style="margin-top:.4%">
+        <li style="color:rgba(255,255,255,.9)">노경 전략·방향 수립</li>
+        <li style="color:rgba(255,255,255,.9)">글로벌 표준 정책·기준</li>
+        <li style="color:rgba(255,255,255,.9)">역량 체계(ERCC) 관리</li>
+        <li style="color:rgba(255,255,255,.9)">법규 모니터링·AX 시스템</li>
+        <li style="color:rgba(255,255,255,.9)">데이터 분석·AI 플랫폼</li>
+      </ul>
+    </div>
+    <div class="om-arr">→</div>
+    <div class="om-box" style="background:#1e40af;color:white">
+      <div class="t-sm fw7 c-white" style="text-align:center;margin-bottom:.5%">Regional / 법인 Hub</div>
+      <div class="t-xs c-white" style="opacity:.75;text-align:center;margin-bottom:.6%">지역별 실행 지원·허브</div>
+      <div class="divider" style="background:rgba(255,255,255,.2)"></div>
+      <ul class="bul sm" style="margin-top:.4%">
+        <li style="color:rgba(255,255,255,.9)">법인별 노경 총괄 책임</li>
+        <li style="color:rgba(255,255,255,.9)">현지 가이드라인 운영</li>
+        <li style="color:rgba(255,255,255,.9)">이슈 에스컬레이션 체계</li>
+        <li style="color:rgba(255,255,255,.9)">HR 역량 교육·지원</li>
+        <li style="color:rgba(255,255,255,.9)">파견 전문인력 pairing</li>
+      </ul>
+    </div>
+    <div class="om-arr">→</div>
+    <div class="om-box" style="background:#0e7490;color:white">
+      <div class="t-sm fw7 c-white" style="text-align:center;margin-bottom:.5%">Site 실행</div>
+      <div class="t-xs c-white" style="opacity:.75;text-align:center;margin-bottom:.6%">현장완결형 자체 운영</div>
+      <div class="divider" style="background:rgba(255,255,255,.2)"></div>
+      <ul class="bul sm" style="margin-top:.4%">
+        <li style="color:rgba(255,255,255,.9)">현장노조 일상 대응</li>
+        <li style="color:rgba(255,255,255,.9)">개별 근로관계 처리</li>
+        <li style="color:rgba(255,255,255,.9)">조직책임자 완결형 관리</li>
+        <li style="color:rgba(255,255,255,.9)">즉시 대응 + 이슈 보고</li>
+        <li style="color:rgba(255,255,255,.9)">지역사회·현지 관계 관리</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-gray" style="flex-shrink:0;margin-top:.6%">
+    <span class="t-xs fw6 c-navy">▪ 현재: HQ 집중형 (지원·ad-hoc)</span>
+    <span class="t-xs c-gray" style="margin:0 1%">→</span>
+    <span class="t-xs fw6 c-amber">▪ 목표: 3층 분산형 (HQ CoE + Hub + Site 완결)</span>
+    <span class="t-xs c-gray" style="margin:0 1%">|</span>
+    <span class="t-xs fw6 c-red">인력·시스템 투자 수반 필수</span>
+  </div>
+</div>
+<div class="s-foot"><span>운영모델은 현재 HQ 집중형에서 3층 분산형으로 전환 필요 / 인력·시스템 투자 전제</span><span>노경 3.0 정의 3-2 | 지향점</span></div>
+</div>
+
+<!-- SLIDE 7: KSF Overview -->
+<div class="slide" id="s7">
+<div class="s-head">
+  <div class="s-title">노경 3.0 성공의 3대 핵심요소: 리소스·마인드·시스템의 동시 전환</div>
+  <div class="s-meta"><span class="s-cat">KSF Overview 4</span><span class="s-num">7 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">세 가지 축 중 어느 하나라도 결여되면 노경 3.0 전환은 선언에 그칠 수 있다</div>
+  <div class="ksf-grid">
+    <div class="ksf-col">
+      <div class="ksf-head" style="background:#1B3A6B">① 리소스 확보</div>
+      <div class="ksf-body">
+        <div class="t-xs fw6 c-navy" style="margin-bottom:.4%">노경 역량 고도화</div>
+        <ul class="bul sm">
+          <li>8개 ERCC 역량 Gap 기반 우선 육성</li>
+          <li>글로벌 소통력·Data분석력 집중 강화</li>
+          <li>내부 멘토링·로테이션·외부 파트너십</li>
+        </ul>
+        <div class="divider"></div>
+        <div class="t-xs fw6 c-navy" style="margin-bottom:.4%">노경조직 리빌딩</div>
+        <ul class="bul sm">
+          <li>HQ-법인-사이트 역할 재정의</li>
+          <li>사이트(Location) 기반 운영모델 전환</li>
+          <li>인력 pool 구축 + pairing 제도</li>
+          <li>역할 재설계 → 충원 우선순위화</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ksf-col">
+      <div class="ksf-head" style="background:#1e40af">② 마인드 전환</div>
+      <div class="ksf-body">
+        <div class="t-xs fw6 c-blue" style="margin-bottom:.4%">경영진(법인장) 교육</div>
+        <ul class="bul sm">
+          <li>노동환경 변화·리스크 overview</li>
+          <li>현장완결형 노경 리더십 역할</li>
+          <li>노경 사례연구 + 법적 책임 인식</li>
+        </ul>
+        <div class="divider"></div>
+        <div class="t-xs fw6 c-blue" style="margin-bottom:.4%">주재원·HR 교육</div>
+        <ul class="bul sm">
+          <li>파견국 노동법 기초 + 현지 노조 이해</li>
+          <li>HR 노경 이해도 제고 프로그램</li>
+          <li>"노경 = 리더십·사업운영 이슈" 인식 전환</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ksf-col">
+      <div class="ksf-head" style="background:#0e7490">③ 시스템 구축</div>
+      <div class="ksf-body">
+        <div class="t-xs fw6" style="color:#0e7490;margin-bottom:.4%">AX 기반 업무 전환</div>
+        <ul class="bul sm">
+          <li>노경 이슈 접수·처리 디지털화</li>
+          <li>교섭이력·협약 DB 구축</li>
+          <li>대시보드 기반 노경 현황 가시화</li>
+        </ul>
+        <div class="divider"></div>
+        <div class="t-xs fw6" style="color:#0e7490;margin-bottom:.4%">표준화 + 상시 운영</div>
+        <ul class="bul sm">
+          <li>노경부문 내 pairing 제도 운영</li>
+          <li>상시 task 체계 (주/월/분기 리뷰)</li>
+          <li>표준 프로세스·템플릿·이슈 DB</li>
+          <li>AI 기반 즉시 대응 체계(장기)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-gray" style="flex-shrink:0;text-align:center">
+    <span class="t-xs fw6 c-navy">자세한 실행방안 →</span>
+    <span class="t-xs c-gray" style="margin:0 .5%">리소스: Slide 10 | 마인드: Slide 11 | 시스템: Slide 12</span>
+  </div>
+</div>
+<div class="s-foot"><span>KSF 3대 축은 독립적 추진이 아닌 동시·통합 전환이 핵심</span><span>KSF Overview 4</span></div>
+</div>
+
+<!-- SLIDE 8: ERCC 역량 정의 -->
+<div class="slide" id="s8">
+<div class="s-head">
+  <div class="s-title">노경 3.0 요구역량(ERCC): 3개 묶음 8개 역량으로 체계화</div>
+  <div class="s-meta"><span class="s-cat">역량분석 5-1</span><span class="s-num">8 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">집단적·제도적·전문분석 역량의 균형 잡힌 조합이 노경 3.0 실행의 기반이다</div>
+  <div style="flex:1;overflow:hidden">
+    <table class="tbl" style="height:100%">
+      <tr>
+        <th style="width:12%">묶음</th>
+        <th style="width:18%" class="tl">역량명</th>
+        <th class="tl">정의</th>
+        <th style="width:16%">노경 3.0 중요도</th>
+        <th style="width:12%">현재 수준</th>
+      </tr>
+      <tr>
+        <td class="nb" rowspan="3" style="text-align:center;vertical-align:middle;font-size:.62vw">A<br><b>노사관계</b></td>
+        <td>집단적 노사관계</td>
+        <td>노조 집행부와의 단체교섭·스킨십, O/L 소통활동 운영 역량</td>
+        <td class="tc" style="color:#D97706">★★★★★ 최우선</td>
+        <td class="tc"><span class="bd bd-a">팀별 편차 大</span></td>
+      </tr>
+      <tr>
+        <td>노사분쟁 대응력</td>
+        <td>파업·태업·노동위원회 등 노사갈등 위기관리 경험 및 능력</td>
+        <td class="tc" style="color:#1B3A6B">★★★★</td>
+        <td class="tc"><span class="bd bd-a">중간 수준</span></td>
+      </tr>
+      <tr>
+        <td>이해관계자 소통력</td>
+        <td>경영진·노조·현장 간 이해관계 조율, 설득·의견관철 능력</td>
+        <td class="tc" style="color:#1B3A6B">★★★★</td>
+        <td class="tc"><span class="bd bd-g">전체 강점</span></td>
+      </tr>
+      <tr>
+        <td class="nb" rowspan="2" style="text-align:center;vertical-align:middle;font-size:.62vw">B<br><b>제도 운영</b></td>
+        <td>인사제도 운영력</td>
+        <td>인사제도 설계·운영, 현장 실무 경험</td>
+        <td class="tc" style="color:#64748b">★★★</td>
+        <td class="tc"><span class="bd bd-a">운영팀 강점</span></td>
+      </tr>
+      <tr>
+        <td>개별 노사관계</td>
+        <td>근로자 개인의 고충처리, 징계, 면담 등 개별 근로관계 운영</td>
+        <td class="tc" style="color:#1B3A6B">★★★★</td>
+        <td class="tc"><span class="bd bd-gr">중간 수준</span></td>
+      </tr>
+      <tr>
+        <td class="nb" rowspan="3" style="text-align:center;vertical-align:middle;font-size:.62vw">C<br><b>전문지식·<br>분석력</b></td>
+        <td>Data기반 노무 리스크 분석력</td>
+        <td>데이터 처리·분석으로 노무 리스크 정량 진단 및 대응</td>
+        <td class="tc" style="color:#D97706">★★★★ 3.0 신규</td>
+        <td class="tc"><span class="bd bd-r">전체 약점</span></td>
+      </tr>
+      <tr>
+        <td>글로벌 소통력</td>
+        <td>해외 사업장 현지 노동법 해석, 현장 소통, 외국어 역량</td>
+        <td class="tc" style="color:#D97706">★★★★★ 최우선</td>
+        <td class="tc"><span class="bd bd-a">중간 수준</span></td>
+      </tr>
+      <tr>
+        <td>노동법 지식·동향 센싱</td>
+        <td>노동법 숙지, 노경 트렌드 조기 감지 및 내부 적용 설계</td>
+        <td class="tc" style="color:#1B3A6B">★★★★</td>
+        <td class="tc"><span class="bd bd-g">협력팀 강점</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="s-foot"><span>중요도는 노경 3.0 전환 맥락에서의 우선순위 반영 (★5점 만점 기준) / 현재 수준은 다음 슬라이드 분석 참조</span><span>역량분석 5-1 | ERCC 정의</span></div>
+</div>
+
+<!-- SLIDE 9: 역량 분석 + Radar Chart -->
+<div class="slide" id="s9">
+<div class="s-head">
+  <div class="s-title">현재 역량 분석: 이해관계자 소통력은 강점이나 글로벌·Data·집단적 노사관계 Gap이 심각하다</div>
+  <div class="s-meta"><span class="s-cat">역량분석 5-2</span><span class="s-num">9 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">노경 3.0 핵심 요구역량인 글로벌 소통력·Data분석력에서 팀 간 불균형 및 전체적 gap이 크다</div>
+  <div class="radar-wrap">
+    <div class="radar-canvas-box">
+      <canvas id="radarChart" style="max-width:100%;max-height:100%"></canvas>
+    </div>
+    <div class="radar-table-box">
+      <div class="sec">팀별 강점·보완점 요약</div>
+      <table class="tbl" style="flex:1">
+        <tr><th style="width:20%">팀</th><th>강점</th><th>보완점</th><th style="width:25%">3.0 핵심 Gap</th></tr>
+        <tr>
+          <td class="nb">노경기획팀</td>
+          <td>이해관계자 소통(3.4)<br>노동법·동향(2.8)</td>
+          <td>인사제도(1.4)<br>집단적ER(1.6)</td>
+          <td><span class="bd bd-r">집단적 ER 경험 부족</span></td>
+        </tr>
+        <tr>
+          <td class="nb">노경협력팀</td>
+          <td>이해관계자 소통(4.2)<br>노동법·동향(3.8)</td>
+          <td>Data분석력(1.4)<br>인사제도(1.6)</td>
+          <td><span class="bd bd-r">Data·분석 역량 전무</span></td>
+        </tr>
+        <tr>
+          <td class="nb">노경운영팀</td>
+          <td>인사제도(4.33)<br>이해관계자 소통(3.67)</td>
+          <td>집단적ER(0.33)<br>노사분쟁(1.0)</td>
+          <td><span class="bd bd-r">집단·분쟁 역량 극히 부족</span></td>
+        </tr>
+      </table>
+      <div class="divider"></div>
+      <div class="sec">전체 총평 및 3.0 Gap</div>
+      <div class="card-red">
+        <ul class="bul sm">
+          <li>전체 <b>이해관계자 소통력</b>은 상대적 강점</li>
+          <li><b>Data기반 분석력</b>: 전 팀 평균 1.9점 — 즉각 보강 필요</li>
+          <li><b>글로벌 소통력</b>: 전 팀 평균 2.8점 — 3.0 전환 최대 병목</li>
+          <li><b>집단적 노사관계</b>: 팀 간 편차 극심 (0.33~3.8)</li>
+          <li>노경 3.0 요구역량 대비 <b>전반적 수준 부족</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>역량 평가 5점 만점 / 측정기준 및 방법론은 내부 기준 적용 / [내부 관찰] 데이터</span><span>역량분석 5-2 | Radar Chart</span></div>
+</div>
+
+<!-- SLIDE 10: KSF 실행방안 - 리소스 -->
+<div class="slide" id="s10">
+<div class="s-head">
+  <div class="s-title">KSF ① 리소스 확보: 역량 Gap 기반 우선순위화 + 조직 리빌딩 + 사이트 기반 운영</div>
+  <div class="s-meta"><span class="s-cat">KSF 실행 6-1</span><span class="s-num">10 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">인력 증원에 앞서 역할 재설계·pool 구축·내부 육성·pairing이 선행되어야 한다</div>
+  <div class="g3" style="flex:1">
+    <div class="pc pc-s">
+      <div class="pc-h">⚡ Quick Win (단기, ~'25)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>8개 역량 Gap 기반 우선 육성 대상 선정</li>
+          <li>집단적 노사관계 경험자 cross-pollination</li>
+          <li>글로벌 담당자 pool (사내·외) 긴급 확보</li>
+          <li>노경부문 pairing 제도 시범 운영</li>
+          <li>Data분석력 보강 (외부 교육·툴 도입)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-m">
+      <div class="pc-h">📋 중기과제 ('26~'27)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>HQ-법인-사이트 역할 재정의 및 TO 설계</li>
+          <li>사이트 기반 노경 인력 배치 (현장완결형)</li>
+          <li>내부 육성 프로그램 (멘토링·로테이션)</li>
+          <li>외부 전문가 체계화 (법무·노무법인 파트너)</li>
+          <li>글로벌 ER 담당자 중장기 육성 pipeline</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-l">
+      <div class="pc-h">🏗 구조과제 ('28~)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>노경 역량 체계(ERCC) 공식화 및 HRD 연계</li>
+          <li>글로벌 ER 전문가 장기 채용·육성</li>
+          <li>노경 조직 독립성 및 위상 강화</li>
+          <li>성과·역량 기반 보상 연계 체계</li>
+          <li>노경 전문가 외부 인지도 구축</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="g2" style="flex-shrink:0;gap:1%;margin-top:.5%">
+    <div class="card-navy">
+      <div class="t-xs fw6 c-white" style="margin-bottom:.3%">조직 리빌딩 방향</div>
+      <ul class="bul sm">
+        <li style="color:rgba(255,255,255,.9)">HQ CoE: 전략·기준·역량 관리</li>
+        <li style="color:rgba(255,255,255,.9)">법인 Hub: 지역별 실행 지원</li>
+        <li style="color:rgba(255,255,255,.9)">Site: 현장완결형 자체 대응</li>
+      </ul>
+    </div>
+    <div class="card-amber-light">
+      <div class="t-xs fw6 c-amber" style="margin-bottom:.3%">우선 충원 포지션 (권장)</div>
+      <ul class="bul sm">
+        <li>글로벌 ER 전담 (해외 노동법·영어)</li>
+        <li>Data 기반 노무 분석 담당</li>
+        <li>사무직 노경관리 전담</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>리소스 확보는 KSF 3축 중 가장 즉각적 실행 가능 영역 / 우선순위 설정 후 단계적 추진</span><span>KSF 실행 6-1 | 리소스</span></div>
+</div>
+
+<!-- SLIDE 11: KSF 실행방안 - 마인드 -->
+<div class="slide" id="s11">
+<div class="s-head">
+  <div class="s-title">KSF ② 마인드 전환: '노경은 특정팀 이슈'가 아니라 '리더십·사업운영 이슈'다</div>
+  <div class="s-meta"><span class="s-cat">KSF 실행 6-2</span><span class="s-num">11 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">경영진이 노경 리스크를 사업 리스크로 인식할 때 비로소 예방형 노경이 작동한다</div>
+  <div style="flex:1;overflow:hidden;margin-bottom:.5%">
+    <table class="tbl" style="height:100%">
+      <tr><th style="width:14%">대상</th><th style="width:28%">핵심 교육 내용</th><th style="width:14%">방식</th><th style="width:10%">빈도</th><th>기대 효과</th></tr>
+      <tr>
+        <td class="nb" style="font-size:.65vw;text-align:center">경영진<br>(법인장)</td>
+        <td>
+          <ul class="bul sm">
+            <li>노동환경 변화·리스크 overview</li>
+            <li>현장완결형 노경 리더십 역할</li>
+            <li>국내외 노경 사례연구</li>
+            <li>법적 책임 범위 및 위기 시 역할</li>
+          </ul>
+        </td>
+        <td>집합교육 +<br>1:1 briefing</td>
+        <td>연 2회 +<br>이슈 발생 시</td>
+        <td>
+          <ul class="bul sm">
+            <li>법인장 주도 노경 관리 체계 정착</li>
+            <li>노경 리스크를 사업 전략에 반영</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="nb" style="font-size:.65vw;text-align:center">주재원</td>
+        <td>
+          <ul class="bul sm">
+            <li>파견국 노동법 기초 및 현지 노조 이해</li>
+            <li>UAW 등 주요 노조 조직화 패턴 이해</li>
+            <li>위기 상황 대응 프로토콜</li>
+            <li>문화·커뮤니케이션 이해</li>
+          </ul>
+        </td>
+        <td>e-learning +<br>현지 전문가 강의</td>
+        <td>파견 전 필수 +<br>연 1회 업데이트</td>
+        <td>
+          <ul class="bul sm">
+            <li>현지 노사 리스크 조기 발견</li>
+            <li>주재원 초기 대응 역량 확보</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="nb" style="font-size:.65vw;text-align:center">HR<br>(사업부 포함)</td>
+        <td>
+          <ul class="bul sm">
+            <li>집단·개별 노사관계 기초 실무</li>
+            <li>사무직 노경관리 실전 사례</li>
+            <li>이슈 보고·에스컬레이션 절차</li>
+            <li>노경 관련 법적 절차 이해</li>
+          </ul>
+        </td>
+        <td>사례 중심<br>워크숍</td>
+        <td>반기 1회</td>
+        <td>
+          <ul class="bul sm">
+            <li>HR의 노경 초기 대응 역량 확보</li>
+            <li>노경팀과 사업부 HR 연계 강화</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="hl-amber">
+    <div class="t-sm fw7 c-white">"노경 이슈의 1차 책임자는 현장 리더와 사업부 HR이다. 노경팀은 전문 지원·CoE 역할을 수행한다."</div>
+  </div>
+</div>
+<div class="s-foot"><span>마인드 전환은 단기 교육으로 완성되지 않음 / 지속적 사례 공유·리더십 평가 연계 필요</span><span>KSF 실행 6-2 | 마인드</span></div>
+</div>
+
+<!-- SLIDE 12: KSF 실행방안 - 시스템 -->
+<div class="slide" id="s12">
+<div class="s-head">
+  <div class="s-title">KSF ③ 시스템 구축: AX·표준화·AI 기반 노경 업무를 데이터 중심 상시운영체계로 전환</div>
+  <div class="s-meta"><span class="s-cat">KSF 실행 6-3</span><span class="s-num">12 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">시스템 없는 역량·마인드는 개인 역량에 의존하게 되어 조직 지속가능성을 보장하지 못한다</div>
+  <div class="g2" style="flex:1">
+    <div class="col">
+      <div class="card-light">
+        <div class="sec" style="font-size:.68vw">AX 기반 업무 전환</div>
+        <ul class="bul sm">
+          <li>노경 이슈 접수·처리·이력 디지털화</li>
+          <li>교섭 이력·단체협약 DB 구축 및 검색</li>
+          <li>대시보드 기반 노경 현황 가시화 (CEO 보고)</li>
+          <li>글로벌 노경 이슈 통합 모니터링</li>
+        </ul>
+      </div>
+      <div class="card-light">
+        <div class="sec" style="font-size:.68vw">Pairing 제도</div>
+        <ul class="bul sm">
+          <li>HQ ↔ 법인 노경 담당자 정기 pairing</li>
+          <li>선임-후임 지식 이전 체계 (succession)</li>
+          <li>글로벌 이슈 공동 대응 훈련</li>
+          <li>사내 노경 전문가 pool 가시화</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-green">
+        <div class="sec" style="font-size:.68vw;border-color:#059669;color:#065f46">상시 Task 운영체계</div>
+        <ul class="bul sm">
+          <li>노경 상시 모니터링 task (주/월/분기)</li>
+          <li>이슈 조기 발견 alert 체계</li>
+          <li>정기 노경 리스크 리뷰 (CEO 보고 포함)</li>
+          <li>국내외 동향 분기별 scanning·보고</li>
+        </ul>
+      </div>
+      <div class="card-amber-light">
+        <div class="sec" style="font-size:.68vw;border-color:#D97706;color:#78350f">표준화 + AI (장기)</div>
+        <ul class="bul sm">
+          <li>표준 프로세스·템플릿 전사 구축</li>
+          <li>국가별 로컬 노동법 룰 DB 체계화</li>
+          <li>AI 기반 법규 변화 모니터링·즉시 대응</li>
+          <li>AI 챗봇 (현장 노경 FAQ 자동 응답)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-gray" style="flex-shrink:0">
+    <div class="t-xs fw6 c-navy" style="margin-bottom:.3%">시스템 구축 타임라인</div>
+    <div style="display:flex;gap:1%;align-items:center">
+      <div class="card-amber-light" style="flex:1;text-align:center"><div class="t-xs fw6" style="color:#78350f">단기 (~'25)</div><div class="t-xs c-gray">이슈 DB + 대시보드</div></div>
+      <div style="font-size:1vw;color:#1B3A6B">→</div>
+      <div class="card-light" style="flex:1;text-align:center"><div class="t-xs fw6 c-blue">중기 ('26~'27)</div><div class="t-xs c-gray">AX 통합 + 표준화</div></div>
+      <div style="font-size:1vw;color:#1B3A6B">→</div>
+      <div class="card-green" style="flex:1;text-align:center"><div class="t-xs fw6 c-green">장기 ('28~)</div><div class="t-xs c-gray">AI 즉시 대응 플랫폼</div></div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>시스템 투자는 노경부문 단독 예산으로 추진 불가 / 경영진 투자 결단 및 IT 부문 협력 필수</span><span>KSF 실행 6-3 | 시스템</span></div>
+</div>
+
+<!-- SLIDE 13: 당면과제 Overview Roadmap -->
+<div class="slide" id="s13">
+<div class="s-head">
+  <div class="s-title">6대 당면과제: 우선순위·시급도 기반 Phase별 집중 실행이 필요하다</div>
+  <div class="s-meta"><span class="s-cat">당면과제 Overview 7</span><span class="s-num">13 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">현장노조·글로벌 노경·사무노조 3개 영역이 단기 최우선 과제로 집중 자원 투입이 필요하다</div>
+  <div class="hm-wrap">
+    <div class="hm-hdr">
+      <div class="hm-c hm-lbl" style="background:white;border:none;font-weight:700">6대 카테고리</div>
+      <div class="hm-c hm-hd">Phase 1 단기 (~'25)<br>즉각 실행</div>
+      <div class="hm-c hm-hd">Phase 2 중기 ('26~'27)<br>체계 구축</div>
+      <div class="hm-c hm-hd">Phase 3 장기 ('28~)<br>고도화</div>
+    </div>
+    <div class="hm-row">
+      <div class="hm-c hm-lbl">① 현장노조</div>
+      <div class="hm-c hm-hi">독자적 노경관계 구축<br>현장리더 역할 재정립</div>
+      <div class="hm-c hm-hi">쟁의대응 전략 고도화<br>현장감독자 완결형 관리</div>
+      <div class="hm-c hm-mi">소수노조 전환 대응<br>정리해고 집단분쟁 관리</div>
+    </div>
+    <div class="hm-row">
+      <div class="hm-c hm-lbl">② 사무노조</div>
+      <div class="hm-c hm-hi">관리 방향성 정립<br>세 확산 시나리오 플랜</div>
+      <div class="hm-c hm-hi">조합활동 대응<br>공정대표의무 이행</div>
+      <div class="hm-c hm-mi">과반수노조 출범 대응<br>노노 갈등 관리</div>
+    </div>
+    <div class="hm-row">
+      <div class="hm-c hm-lbl">③ 사무직 노경관리</div>
+      <div class="hm-c hm-hi">인덱스·O/L풀·원칙 수립<br>사업부 HR 역량 강화</div>
+      <div class="hm-c hm-mi">예방형 체계<br>사무직 건전화 확대</div>
+      <div class="hm-c hm-lo">조직완결형 노무관리<br>시스템화</div>
+    </div>
+    <div class="hm-row">
+      <div class="hm-c hm-lbl">④ 글로벌 노경</div>
+      <div class="hm-c hm-hi">펀더멘털 구축<br>법인별 안정화 이행</div>
+      <div class="hm-c hm-hi">Global ER HUB 설치<br>표준 모델 구축</div>
+      <div class="hm-c hm-mi">법인 완결형 체계<br>글로벌 선행 대응</div>
+    </div>
+    <div class="hm-row">
+      <div class="hm-c hm-lbl">⑤ 현장직 인사제도</div>
+      <div class="hm-c hm-mi">인력 재배치<br>기술전문가 육성</div>
+      <div class="hm-c hm-mi">직무체계·진급제도<br>개선</div>
+      <div class="hm-c hm-lo">직무급 설계<br>인력구조 재편</div>
+    </div>
+    <div class="hm-row">
+      <div class="hm-c hm-lbl">⑥ 노경이슈 선행대응</div>
+      <div class="hm-c hm-hi">노란봉투법 대응<br>포괄임금제 대응</div>
+      <div class="hm-c hm-mi">근로시간단축<br>정년연장 대응</div>
+      <div class="hm-c hm-lo">AI 노경 대응 플랫폼<br>자체 대응 체계</div>
+    </div>
+  </div>
+  <div class="card-gray" style="flex-shrink:0;margin-top:.4%">
+    <span class="t-xs fw6 c-navy">■ 진한 navy</span><span class="t-xs c-gray"> 즉각 자원 투입 필요 (High)</span>&nbsp;&nbsp;&nbsp;
+    <span class="t-xs fw6" style="color:#3b82f6">■ Blue</span><span class="t-xs c-gray"> 체계적 준비 필요 (Mid)</span>&nbsp;&nbsp;&nbsp;
+    <span class="t-xs fw6" style="color:#93c5fd">■ 연파랑</span><span class="t-xs c-gray"> 중장기 설계 필요 (Low)</span>
+  </div>
+</div>
+<div class="s-foot"><span>각 카테고리 상세 내용 → Slide 14~19 참조</span><span>당면과제 Overview 7</span></div>
+</div>
+
+<!-- SLIDE 14: 현장노조 -->
+<div class="slide" id="s14">
+<div class="s-head">
+  <div class="s-title">현장노조: 독자적 노경관계 구축에서 미래 생산체계 전환까지 단계적 대응이 필요하다</div>
+  <div class="s-meta"><span class="s-cat">카테고리별 상세 8-1</span><span class="s-num">14 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">현장노조와의 협력적 관계를 기반으로 자동화·생산구조 재편에 대한 선제 협약이 요구된다</div>
+  <div class="row" style="flex-shrink:0;margin-bottom:.5%">
+    <div class="card-gray" style="flex:1"><div class="t-xs fw6 c-navy">현황</div><div class="t-xs c-gray">현장직 2,000명 규모 / 단일 노조 체계 / 집단적 노사관계 중심 / 임단협 주기적 교섭</div></div>
+    <div class="card-amber-light" style="flex:1;margin-left:1%"><div class="t-xs fw6" style="color:#78350f">유의 리스크</div><div class="t-xs c-gray">자동화 가속 → 조합원 감소 → 노조 강경화 가능성 / 해외 노조 연대 시 복합 대응 필요</div></div>
+  </div>
+  <div class="g3" style="flex:1">
+    <div class="pc pc-s">
+      <div class="pc-h">단기 (~'25)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>독자적 노경관계 구축 전략 수립</li>
+          <li>현장리더 역할 재정립 및 교육</li>
+          <li>임단협 프로세스 개선·표준화</li>
+          <li>현장 노사협의회 기능 강화</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-m">
+      <div class="pc-h">중기 ('26~'27)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>회사 주도 노경관계 구축</li>
+          <li>쟁의행위 대응 전략 고도화</li>
+          <li>현장감독자 완결형 노무관리 체계</li>
+          <li>자동화·스마트공장 고용안정 협약</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-l">
+      <div class="pc-h">장기 ('28~)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>소수노조 전환 시 대응 전략</li>
+          <li>정리해고 등 집단적 분쟁 관리</li>
+          <li>해외 노조 연대 대응 전략</li>
+          <li>미래 생산체계 협력적 노사관계 구축</li>
+          <li>제조 자동화로 인한 조합원 감소 대응</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>[시나리오] 제조 자동화 가속에 따른 조합원 감소·노조 성향 변화 모니터링 필요</span><span>카테고리별 상세 8-1 | 현장노조</span></div>
+</div>
+
+<!-- SLIDE 15: 사무노조 -->
+<div class="slide" id="s15">
+<div class="s-head">
+  <div class="s-title">사무노조: 설립 가능성에 대한 시나리오 플랜과 법적 대응체계를 즉시 수립해야 한다</div>
+  <div class="s-meta"><span class="s-cat">카테고리별 상세 8-2</span><span class="s-num">15 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">사무직 노조 설립은 복수노조·교섭창구단일화·공정대표의무 등 복합적 법적 이슈를 연쇄 촉발한다</div>
+  <div class="card-red" style="flex-shrink:0;margin-bottom:.5%">
+    <div class="t-xs fw6 c-red" style="margin-bottom:.3%">법적 이슈 연쇄 구조</div>
+    <div style="display:flex;align-items:center;gap:.5%;font-size:.6vw;flex-wrap:wrap">
+      <span class="bd bd-r" style="font-size:.6vw">사무노조 설립</span>→
+      <span class="bd bd-r" style="font-size:.6vw">복수노조</span>→
+      <span class="bd bd-r" style="font-size:.6vw">교섭창구단일화</span>→
+      <span class="bd bd-r" style="font-size:.6vw">공정대표의무</span>→
+      <span class="bd bd-r" style="font-size:.6vw">과반수노조 이슈</span>→
+      <span class="bd bd-r" style="font-size:.6vw">노노갈등</span>
+    </div>
+  </div>
+  <div class="g3" style="flex:1">
+    <div class="pc pc-s">
+      <div class="pc-h">단기 (~'25)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>사무노조 관리 방향성 정립</li>
+          <li>세 확산 시나리오 플랜 수립</li>
+          <li>교섭단위 분리 법적 대응 준비</li>
+          <li>노사협의회·근로자대표 이슈 대응</li>
+          <li><span class="bd bd-a">[시나리오]</span> '26년 성과급 후 모니터링</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-m">
+      <div class="pc-h">중기 ('26~'27)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>사무노조 조합활동 요구 대응</li>
+          <li>공정대표의무 이행 체계 구축</li>
+          <li>제3노조 출현 시 대응방안</li>
+          <li>사무-현장 노조 연대 대응</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-l">
+      <div class="pc-h">장기 ('28~)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>과반수 노조 출범 시 대응 전략</li>
+          <li>노노 갈등 관리 방안</li>
+          <li>복수노조 장기 안정화 체계</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>[시나리오] 2026년 경영성과급 지급 후 사무직 노조 확대 가능성 모니터링 / [내부 관찰] 기반</span><span>카테고리별 상세 8-2 | 사무노조</span></div>
+</div>
+
+<!-- SLIDE 16: 사무직 노경관리 -->
+<div class="slide" id="s16">
+<div class="s-head">
+  <div class="s-title">사무직 노경관리: 인덱스 구축과 예방형 체계로 조직 완결형 관리 기반을 만든다</div>
+  <div class="s-meta"><span class="s-cat">카테고리별 상세 8-3</span><span class="s-num">16 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">사무직 노경관리는 노경팀 단독이 아닌 조직책임자·사업부 HR의 역할 확대를 전제로 한다</div>
+  <div class="row" style="flex-shrink:0;margin-bottom:.5%">
+    <div class="card-gray" style="flex:1"><div class="t-xs fw6 c-navy">현황</div><div class="t-xs c-gray">사무직 10,000명 / 회사 제도 사무직 중심화 / 관리자 노경 관심도 미흡 / 체계적 관리 부재</div></div>
+    <div class="card-amber-light" style="flex:1;margin-left:1%"><div class="t-xs fw6" style="color:#78350f">방향</div><div class="t-xs c-gray">개별 고충 → 집단 이슈 예방 / 노경관리 인덱스 기반 상시 모니터링 / 조직책임자 역할 부여</div></div>
+  </div>
+  <div class="g3" style="flex:1">
+    <div class="pc pc-s">
+      <div class="pc-h">단기 (~'25)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>노경관리 인덱스 구축</li>
+          <li>사업부 HR 노경역량 강화</li>
+          <li>O/L(Opinion Leader) 풀 확보</li>
+          <li>사무직 노경관리 정의·원칙 수립</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-m">
+      <div class="pc-h">중기 ('26~'27)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>경영진 노경마인드 제고 프로그램</li>
+          <li>예방형 노무관리 체계 구축</li>
+          <li>사무직 우호·건전화 확대</li>
+          <li>노사협의회 선제적 설치 검토</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-l">
+      <div class="pc-h">장기 ('28~)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>조직책임자 완결형 노무관리 체계</li>
+          <li>자기주도형 노무관리 시스템화</li>
+          <li>데이터 기반 조직 건강도 모니터링</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>사무직 노경관리는 현재 체계적 실행 기반이 없는 영역으로 즉각적 설계 착수 필요</span><span>카테고리별 상세 8-3 | 사무직 노경관리</span></div>
+</div>
+
+<!-- SLIDE 17: 글로벌 노경 -->
+<div class="slide" id="s17">
+<div class="s-head">
+  <div class="s-title">글로벌 노경: 펀더멘털 구축에서 법인 완결형 상시 운영까지 3단계 전환 로드맵</div>
+  <div class="s-meta"><span class="s-cat">카테고리별 상세 8-4</span><span class="s-num">17 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">글로벌 생산거점 확대 속도가 현재 노경 지원 역량을 이미 초과하고 있다</div>
+  <div class="row" style="flex-shrink:0;margin-bottom:.5%">
+    <div class="card-red" style="flex:1"><div class="t-xs fw6 c-red">현황 리스크</div><div class="t-xs c-gray">HQ 지원 중심 / 법인별 노경 담당 미배치 / 글로벌 표준 부재 / UAW 조직화 확산 위협</div></div>
+    <div class="card-green" style="flex:1;margin-left:1%"><div class="t-xs fw6 c-green">핵심 전환 방향</div><div class="t-xs c-gray">지원형 → 운영형 / Global Standard + Local Rule / HQ CoE → Regional Hub → Site 완결</div></div>
+  </div>
+  <div class="g3" style="flex:1">
+    <div class="pc pc-s">
+      <div class="pc-h">단기 (~'25)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>글로벌 노경 펀더멘털 완성</li>
+          <li>법인별 노경 안정화 과제 이행</li>
+          <li>글로벌 노경 역량 점검 툴 개발</li>
+          <li>글로벌 노경 담당자 풀 확보</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-m">
+      <div class="pc-h">중기 ('26~'27)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>글로벌 ER HUB 설치</li>
+          <li>주체별 노경 역량 강화</li>
+          <li>상시 노경관리 정착</li>
+          <li>공통 가이드라인 + 국가별 로컬 룰</li>
+          <li>글로벌 표준 노사관리 모델 구축</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-l">
+      <div class="pc-h">장기 ('28~)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>글로벌 생산법인 완결형 체계</li>
+          <li>노경 협력관계 컨설팅 역할</li>
+          <li>생산법인 사업전략 대응 시나리오</li>
+          <li>글로벌 노경환경 선행 대응</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>출처: UAW-Ultium Cells 협약(2023), HMGMA 조지아 노동이슈(2024) / [내부 관찰] 포함</span><span>카테고리별 상세 8-4 | 글로벌 노경</span></div>
+</div>
+
+<!-- SLIDE 18: 현장직 인사제도 -->
+<div class="slide" id="s18">
+<div class="s-head">
+  <div class="s-title">현장직 인사제도: 직무·숙련·성과 연계형으로 전환하여 자동화 시대 경쟁력을 확보한다</div>
+  <div class="s-meta"><span class="s-cat">카테고리별 상세 8-5</span><span class="s-num">18 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">로봇·자동화 전환에 따른 인력구조 재편을 위해 직무체계·임금 연공성 완화가 중기 과제로 선행되어야 한다</div>
+  <div class="g3" style="flex:1">
+    <div class="pc pc-s">
+      <div class="pc-h">단기 (~'25)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>효율적 인력 재배치 방안 수립</li>
+          <li>기술전문가/명장 육성 체계</li>
+          <li>현장 인력구조 변화 대응 시나리오</li>
+          <li>현장직 인사제도 현황 진단</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-m">
+      <div class="pc-h">중기 ('26~'27)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>직무체계 수립</li>
+          <li>진급제도 개선</li>
+          <li>전문가 육성·활용 체계</li>
+          <li>불합리 관행 개선</li>
+          <li>자동화 대응 직무 재설계</li>
+          <li>직무·숙련·성과 연계형 고도화</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-l">
+      <div class="pc-h">장기 ('28~)</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>생산기술직 인사제도 표준화</li>
+          <li>로봇/자동화 전환 인력구조 재편</li>
+          <li>숙련도 기반 직무급 설계</li>
+          <li>임금 연공성 완화·폐지 검토</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-red" style="flex-shrink:0;margin-top:.5%">
+    <div class="t-xs fw6 c-red">⚠ 유의 리스크</div>
+    <ul class="bul sm" style="display:flex;gap:2%">
+      <li style="flex:1">직무급 전환 시 현장 노조 반발 가능성</li>
+      <li style="flex:1">인건비 절감 추진 시 집단 분쟁 가능성</li>
+      <li style="flex:1">현장직 인사제도 개편은 노경전략과 통합 설계 필수</li>
+    </ul>
+  </div>
+</div>
+<div class="s-foot"><span>현장직 인사제도 개편은 현장노조와의 단체교섭 의제와 직결 / 노경전략과 통합 설계 필요</span><span>카테고리별 상세 8-5 | 현장직 인사제도</span></div>
+</div>
+
+<!-- SLIDE 19: 노경이슈 선행 대응 -->
+<div class="slide" id="s19">
+<div class="s-head">
+  <div class="s-title">노경이슈 선행 대응: 정책 변화를 피동적으로 수용하지 말고 능동적으로 선점하라</div>
+  <div class="s-meta"><span class="s-cat">카테고리별 상세 8-6</span><span class="s-num">19 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">단기 법적 이슈 대응과 중기 정책 변화 준비, 장기 AI 기반 플랫폼 구축을 동시에 설계해야 한다</div>
+  <div class="g3" style="flex:1">
+    <div class="pc pc-s">
+      <div class="pc-h">단기 (~'25) — 즉각 대응</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>노란봉투법 대응 (교섭 상대방 확대 대비)</li>
+          <li>인력효율화 체계 완성</li>
+          <li>포괄임금제 대응 (근로시간 기록 시스템)</li>
+          <li>대외 네트워크 강화 (고용부·노동연구원)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-m">
+      <div class="pc-h">중기 ('26~'27) — 체계 준비</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>이슈 선행대응 역량 강화</li>
+          <li>근로시간 단축 대응 체계</li>
+          <li>정년연장·계속고용 준비</li>
+          <li>초기업노조 대응 전략</li>
+          <li>동일가치노동 동일임금 체계 정비</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pc pc-l">
+      <div class="pc-h">장기 ('28~) — 플랫폼 구축</div>
+      <div class="pc-b">
+        <ul class="bul sm">
+          <li>노경이슈 자체 대응 플랫폼 (AI 기반)</li>
+          <li>정책 트렌드 선행 감지 시스템</li>
+          <li>자동화 즉시 대응 체계 완성</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-light" style="flex-shrink:0;margin-top:.5%">
+    <div class="t-xs fw6 c-blue" style="margin-bottom:.3%">대외 네트워크 구축 대상</div>
+    <div style="display:flex;gap:1%">
+      <span class="bd bd-b" style="font-size:.6vw">고용노동부</span>
+      <span class="bd bd-b" style="font-size:.6vw">한국노동연구원</span>
+      <span class="bd bd-b" style="font-size:.6vw">노무법인 파트너</span>
+      <span class="bd bd-b" style="font-size:.6vw">경총</span>
+      <span class="bd bd-b" style="font-size:.6vw">산업별 협회</span>
+      <span class="bd bd-b" style="font-size:.6vw">국내외 법무법인</span>
+    </div>
+  </div>
+</div>
+<div class="s-foot"><span>출처: 고용노동부 정책 방향('25), 노조법 개정안 동향, 한국노동연구원 / 기준: 2025~2026</span><span>카테고리별 상세 8-6 | 노경이슈 선행 대응</span></div>
+</div>
+
+<!-- SLIDE 20: 제언 -->
+<div class="slide" id="s20">
+<div class="s-head">
+  <div class="s-title">지금 투자하지 않으면 노경 리스크는 반드시 더 큰 비용이 되어 돌아온다</div>
+  <div class="s-meta"><span class="s-cat">제언 9</span><span class="s-num">20 / 20</span></div>
+</div>
+<div class="s-body">
+  <div class="key-msg">노경 3.0 전환은 선택이 아닌 필수이며, 경영진의 결단과 자원 투입이 실행의 전제 조건이다</div>
+  <div class="g3" style="flex-shrink:0;margin-bottom:.6%">
+    <div class="card-red">
+      <div class="t-xs fw6 c-red">현황 진단 ①</div>
+      <div class="t-sm fw7 c-navy" style="margin:.3% 0">노무 인력 16명 수준</div>
+      <div class="t-xs c-gray">국내+글로벌 확대 범위 대비 현저한 부족 / 사후 진화(fire-fighting) 구조에서 탈피 불가</div>
+    </div>
+    <div class="card-red">
+      <div class="t-xs fw6 c-red">현황 진단 ②</div>
+      <div class="t-sm fw7 c-navy" style="margin:.3% 0">경영진 노경 인식 한계</div>
+      <div class="t-xs c-gray">노경을 "특정팀 이슈"로 인식하는 구조 / 법인장·조직책임자의 노경 관리 역할 미부여</div>
+    </div>
+    <div class="card-red">
+      <div class="t-xs fw6 c-red">현황 진단 ③</div>
+      <div class="t-sm fw7 c-navy" style="margin:.3% 0">시스템 기반 미흡</div>
+      <div class="t-xs c-gray">표준 프로세스·이슈 DB·모니터링 체계 부재 / 개인 역량 의존 → 인력 이탈 시 조직 취약</div>
+    </div>
+  </div>
+  <div class="g3" style="flex-shrink:0;margin-bottom:.6%">
+    <div class="card-amber-light">
+      <div class="t-xs fw6" style="color:#78350f">투자 근거 ①</div>
+      <ul class="bul sm">
+        <li>사무직 노조 설립 후 대응 비용 &gt; 선제 관리 비용</li>
+        <li>조기 예방 투자 대비 사후 분쟁 비용은 수십 배</li>
+      </ul>
+    </div>
+    <div class="card-amber-light">
+      <div class="t-xs fw6" style="color:#78350f">투자 근거 ②</div>
+      <ul class="bul sm">
+        <li>해외 UAW 교섭 결렬 → 생산 차질 = 매출 직접 타격</li>
+        <li>현지 노동 리스크 1건 = 수백억 원 손실 가능</li>
+      </ul>
+    </div>
+    <div class="card-amber-light">
+      <div class="t-xs fw6" style="color:#78350f">투자 근거 ③</div>
+      <ul class="bul sm">
+        <li>정책 변화 피동 수용 시 임금·근로시간 틀 고착</li>
+        <li>선제 대응이 협상 주도권 결정</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card-navy" style="flex-shrink:0;margin-bottom:.6%">
+    <div class="t-xs fw6 c-white" style="margin-bottom:.4%">경영진께 요청드리는 5가지 사항</div>
+    <div class="g3" style="gap:.5%">
+      <ul class="bul sm">
+        <li style="color:rgba(255,255,255,.9)">노경 전담 인력 확충 및 역할 재설계 (HQ+법인+사이트)</li>
+        <li style="color:rgba(255,255,255,.9)">경영진·주재원 노경 교육 <b>의무화</b></li>
+      </ul>
+      <ul class="bul sm">
+        <li style="color:rgba(255,255,255,.9)">글로벌 ER HUB 설치 및 운영 예산 확보</li>
+        <li style="color:rgba(255,255,255,.9)">AX 기반 노경 시스템 투자 승인</li>
+      </ul>
+      <ul class="bul sm">
+        <li style="color:rgba(255,255,255,.9)">노경을 <b>사업운영 리스크</b>로 격상하는 거버넌스 구조 전환</li>
+      </ul>
+    </div>
+  </div>
+  <div class="hl-amber" style="flex-shrink:0">
+    <div class="t-md fw7 c-white">"노사관계는 한번 무너지면 회복에 수년이 걸린다. 지금의 투자는 미래 10년의 노경 안정성을 사는 것이다."</div>
+  </div>
+</div>
+<div class="s-foot"><span>본 제언은 내부 분석 및 외부 벤치마크를 기반으로 작성하였으며 경영진 결정을 위한 참고 자료임</span><span>제언 9 | 노경 3.0 추진전략</span></div>
+</div>
+
+</div><!-- end ppt-frame -->
+</div><!-- end ppt-outer -->
+
+<div class="nav-wrap">
+  <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">◀ 이전</button>
+  <div class="slide-dots" id="dotContainer"></div>
+  <span class="nav-counter" id="navCounter">1 / 21</span>
+  <button class="nav-btn" id="nextBtn" onclick="navigate(1)">다음 ▶</button>
+</div>
+<div class="kb">← → 방향키로 슬라이드 이동</div>
+
+<script>
+const TOTAL = 21;
+let current = 0;
+let radarInitialized = false;
+
+// Build dots
+const dotContainer = document.getElementById('dotContainer');
+for (let i = 0; i < TOTAL; i++) {
+  const d = document.createElement('span');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotContainer.appendChild(d);
+}
+
+function goTo(n) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = Math.max(0, Math.min(TOTAL - 1, n));
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+  document.getElementById('navCounter').textContent = (current + 1) + ' / ' + TOTAL;
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === TOTAL - 1;
+  if (current === 9 && !radarInitialized) {
+    setTimeout(initRadar, 50);
+  }
+}
+
+function navigate(dir) { goTo(current + dir); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') navigate(-1);
+});
+
+goTo(0);
+
+// Radar Chart
+function initRadar() {
+  const canvas = document.getElementById('radarChart');
+  if (!canvas) return;
+  radarInitialized = true;
+  new Chart(canvas, {
+    type: 'radar',
+    data: {
+      labels: [
+        '집단적\n노사관계', '노사분쟁\n대응력', '이해관계자\n소통력',
+        '인사제도\n운영력', '개별\n노사관계', 'Data\n분석력',
+        '글로벌\n소통력', '노동법\n지식·동향'
+      ],
+      datasets: [
+        {
+          label: '노경기획팀',
+          data: [1.6, 2.2, 3.4, 1.4, 1.6, 2.6, 2.6, 2.8],
+          borderColor: '#1B3A6B',
+          backgroundColor: 'rgba(27,58,107,0.15)',
+          borderWidth: 2,
+          pointBackgroundColor: '#1B3A6B',
+          pointRadius: 3
+        },
+        {
+          label: '노경협력팀',
+          data: [3.8, 3.0, 4.2, 1.6, 1.0, 1.4, 3.4, 3.8],
+          borderColor: '#2563EB',
+          backgroundColor: 'rgba(37,99,235,0.15)',
+          borderWidth: 2,
+          pointBackgroundColor: '#2563EB',
+          pointRadius: 3
+        },
+        {
+          label: '노경운영팀',
+          data: [0.33, 1.0, 3.67, 4.33, 2.33, 1.67, 2.33, 1.0],
+          borderColor: '#D97706',
+          backgroundColor: 'rgba(217,119,6,0.15)',
+          borderWidth: 2,
+          pointBackgroundColor: '#D97706',
+          pointRadius: 3
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: { stepSize: 1, font: { size: 8 }, color: '#94a3b8' },
+          grid: { color: '#e2e8f0' },
+          pointLabels: { font: { size: 9, weight: '600' }, color: '#1B3A6B' },
+          angleLines: { color: '#e2e8f0' }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: { size: 9 }, padding: 8, boxWidth: 10 }
+        }
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
