@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELVIS Chat</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #111;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      height: 56px;
+      border-bottom: 1px solid #ececec;
+      flex-shrink: 0;
+      background: #fff;
+    }
+
+    .header-title {
+      font-size: 15px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-title .dot {
+      width: 8px; height: 8px;
+      background: #2ecc71;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity:1; } 50% { opacity:.3; }
+    }
+
+    .header-actions { display: flex; gap: 8px; }
+
+    .icon-btn {
+      width: 34px; height: 34px;
+      border: none; background: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      color: #555;
+      transition: background .15s;
+    }
+    .icon-btn:hover { background: #f5f5f5; }
+
+    /* ── MESSAGES AREA ── */
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px 0 16px;
+      scroll-behavior: smooth;
+    }
+
+    .messages::-webkit-scrollbar { width: 4px; }
+    .messages::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 4px; }
+
+    .msg-row {
+      display: flex;
+      padding: 4px 20px;
+      gap: 10px;
+      max-width: 780px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* USER — right */
+    .msg-row.user {
+      justify-content: flex-end;
+    }
+
+    .msg-row.user .bubble {
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 18px 18px 4px 18px;
+      padding: 12px 16px;
+      max-width: 72%;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* AI — left */
+    .msg-row.ai {
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .ai-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+      letter-spacing: 0.03em;
+    }
+
+    .msg-row.ai .bubble {
+      background: transparent;
+      color: #111;
+      max-width: 80%;
+      font-size: 14px;
+      line-height: 1.75;
+      padding: 4px 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* typing indicator */
+    .typing {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 0 4px;
+    }
+
+    .typing span {
+      width: 7px; height: 7px;
+      background: #ccc;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+
+    .typing span:nth-child(2) { animation-delay: .2s; }
+    .typing span:nth-child(3) { animation-delay: .4s; }
+
+    @keyframes bounce {
+      0%,60%,100% { transform: translateY(0); background: #ccc; }
+      30% { transform: translateY(-5px); background: #999; }
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 12px;
+      color: #aaa;
+      user-select: none;
+    }
+
+    .empty-state .big-logo {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #111;
+    }
+
+    .empty-state p { font-size: 14px; }
+
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 8px;
+      max-width: 480px;
+    }
+
+    .suggestion-chip {
+      font-size: 13px;
+      padding: 8px 16px;
+      border: 1px solid #e5e5e5;
+      border-radius: 100px;
+      cursor: pointer;
+      color: #333;
+      transition: background .15s, border-color .15s;
+    }
+
+    .suggestion-chip:hover { background: #f5f5f5; border-color: #ccc; }
+
+    /* ── INPUT AREA ── */
+    .input-wrap {
+      flex-shrink: 0;
+      padding: 12px 16px 20px;
+      max-width: 780px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .input-box {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 10px 10px 10px 16px;
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .input-box:focus-within {
+      border-color: #aaa;
+      box-shadow: 0 0 0 3px rgba(0,0,0,.04);
+    }
+
+    #userInput {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.5;
+      resize: none;
+      max-height: 160px;
+      min-height: 24px;
+      background: transparent;
+      color: #111;
+    }
+
+    #userInput::placeholder { color: #bbb; }
+
+    .send-btn {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      border: none;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background .15s, transform .1s;
+    }
+
+    .send-btn:hover { background: #333; }
+    .send-btn:active { transform: scale(.95); }
+    .send-btn:disabled { background: #e0e0e0; cursor: not-allowed; }
+
+    .send-btn svg {
+      width: 16px; height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .input-footer {
+      text-align: center;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-title">
+      <span class="dot"></span>
+      ELVIS
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" title="새 대화" onclick="clearChat()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
+      <button class="icon-btn" title="더보기">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- MESSAGES -->
+  <div class="messages" id="messages">
+    <div class="empty-state" id="emptyState">
+      <div class="big-logo">ELVIS</div>
+      <p>무엇이든 물어보세요.</p>
+      <div class="suggestions">
+        <div class="suggestion-chip" onclick="sendSuggestion(this)">오늘 할 일 정리해줘</div>
+        <div class="suggestion-chip" onclick="sendSuggestion(this)">이메일 초안 작성해줘</div>
+        <div class="suggestion-chip" onclick="sendSuggestion(this)">코드 리뷰 부탁해</div>
+        <div class="suggestion-chip" onclick="sendSuggestion(this)">아이디어 브레인스토밍</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUT -->
+  <div class="input-wrap">
+    <div class="input-box">
+      <textarea
+        id="userInput"
+        rows="1"
+        placeholder="메시지를 입력하세요..."
+        onkeydown="handleKey(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>
+        <svg viewBox="0 0 24 24">
+          <line x1="12" y1="19" x2="12" y2="5"/>
+          <polyline points="5 12 12 5 19 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="input-footer">ELVIS는 실수를 할 수 있습니다. 중요한 정보는 직접 확인하세요.</div>
+  </div>
+
+  <script>
+    const messagesEl = document.getElementById('messages');
+    const inputEl    = document.getElementById('userInput');
+    const sendBtn    = document.getElementById('sendBtn');
+    const emptyState = document.getElementById('emptyState');
+
+    let isTyping = false;
+
+    // ── 데모용 자동 응답 ──────────────────────────────
+    const demoReplies = [
+      "네, 말씀해 주신 내용 잘 이해했습니다. 조금 더 구체적으로 설명해 드릴게요.\n\n먼저 핵심 요점을 정리하면:\n• 첫 번째로 고려할 사항입니다.\n• 두 번째로 이 부분도 중요합니다.\n• 세 번째 관점에서도 살펴볼 수 있어요.\n\n더 궁금한 점이 있으시면 편하게 물어보세요.",
+      "좋은 질문이에요! 이 주제는 여러 각도로 볼 수 있는데요.\n\n제 생각엔 가장 중요한 건 **방향성을 먼저 잡는 것**입니다. 세부 사항은 그 다음에 채워나가도 충분해요.\n\n어떤 부분부터 시작하고 싶으신가요?",
+      "물론이죠. 정리해 드리겠습니다.\n\n1. 우선 현재 상황을 파악하고\n2. 목표를 명확히 설정한 뒤\n3. 단계별로 실행 계획을 세우면 됩니다.\n\n각 단계별로 더 자세히 이야기 나눌 수도 있어요.",
+      "그 부분은 꽤 복잡한 문제네요. 맥락을 좀 더 알면 더 정확하게 도움드릴 수 있을 것 같아요.\n\n구체적으로 어떤 상황인지 조금 더 설명해 주시겠어요?"
+    ];
+
+    let replyIndex = 0;
+
+    function getReply() {
+      const r = demoReplies[replyIndex % demoReplies.length];
+      replyIndex++;
+      return r;
+    }
+
+    // ── 입력창 자동 높이 조절 ─────────────────────────
+    function autoResize(el) {
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+      sendBtn.disabled = el.value.trim() === '';
+    }
+
+    // ── Enter 키 처리 ─────────────────────────────────
+    function handleKey(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (!sendBtn.disabled && !isTyping) sendMessage();
+      }
+    }
+
+    // ── 제안 칩 클릭 ─────────────────────────────────
+    function sendSuggestion(el) {
+      inputEl.value = el.textContent;
+      autoResize(inputEl);
+      sendMessage();
+    }
+
+    // ── 메시지 전송 ───────────────────────────────────
+    function sendMessage() {
+      const text = inputEl.value.trim();
+      if (!text || isTyping) return;
+
+      // 빈 상태 숨기기
+      if (emptyState) emptyState.style.display = 'none';
+
+      appendUserBubble(text);
+
+      inputEl.value = '';
+      inputEl.style.height = 'auto';
+      sendBtn.disabled = true;
+
+      showTyping();
+
+      // 0.8~1.6초 딜레이 후 응답
+      const delay = 800 + Math.random() * 800;
+      setTimeout(() => {
+        removeTyping();
+        appendAiBubble(getReply());
+      }, delay);
+    }
+
+    // ── 유저 말풍선 ───────────────────────────────────
+    function appendUserBubble(text) {
+      const row = document.createElement('div');
+      row.className = 'msg-row user';
+      row.innerHTML = `<div class="bubble">${escHtml(text)}</div>`;
+      messagesEl.appendChild(row);
+      scrollBottom();
+    }
+
+    // ── AI 말풍선 ─────────────────────────────────────
+    function appendAiBubble(text) {
+      const row = document.createElement('div');
+      row.className = 'msg-row ai';
+      row.innerHTML = `
+        <div class="ai-avatar">E</div>
+        <div class="bubble"></div>
+      `;
+      messagesEl.appendChild(row);
+      scrollBottom();
+
+      // 타이핑 효과
+      const bubble = row.querySelector('.bubble');
+      typeText(bubble, text);
+    }
+
+    function typeText(el, text) {
+      isTyping = true;
+      let i = 0;
+      const interval = setInterval(() => {
+        el.textContent = text.slice(0, i);
+        i++;
+        scrollBottom();
+        if (i > text.length) {
+          clearInterval(interval);
+          isTyping = false;
+        }
+      }, 14);
+    }
+
+    // ── 타이핑 인디케이터 ─────────────────────────────
+    function showTyping() {
+      const row = document.createElement('div');
+      row.className = 'msg-row ai';
+      row.id = 'typingRow';
+      row.innerHTML = `
+        <div class="ai-avatar">E</div>
+        <div class="bubble">
+          <div class="typing">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      `;
+      messagesEl.appendChild(row);
+      scrollBottom();
+    }
+
+    function removeTyping() {
+      const row = document.getElementById('typingRow');
+      if (row) row.remove();
+    }
+
+    // ── 새 대화 ───────────────────────────────────────
+    function clearChat() {
+      messagesEl.innerHTML = '';
+      const es = document.createElement('div');
+      es.className = 'empty-state';
+      es.id = 'emptyState';
+      es.innerHTML = `
+        <div class="big-logo">ELVIS</div>
+        <p>무엇이든 물어보세요.</p>
+        <div class="suggestions">
+          <div class="suggestion-chip" onclick="sendSuggestion(this)">오늘 할 일 정리해줘</div>
+          <div class="suggestion-chip" onclick="sendSuggestion(this)">이메일 초안 작성해줘</div>
+          <div class="suggestion-chip" onclick="sendSuggestion(this)">코드 리뷰 부탁해</div>
+          <div class="suggestion-chip" onclick="sendSuggestion(this)">아이디어 브레인스토밍</div>
+        </div>
+      `;
+      messagesEl.appendChild(es);
+    }
+
+    // ── 유틸 ─────────────────────────────────────────
+    function scrollBottom() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+  </script>
+
+</body>
+</html>
