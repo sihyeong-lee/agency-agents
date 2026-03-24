@@ -499,14 +499,48 @@ body {
 ```javascript
 (() => {
 const STORE_KEY = "__elvisChatState";
+const PERSIST_KEY = "elvis_chat_v4";
 const POLL_MS = 1800;
 let refreshLock = false;
+
+// ── 영속 스토리지: sessionStorage → localStorage 순으로 시도 ──
+function readPersist() {
+  const storages = [];
+  try { storages.push(sessionStorage); } catch (e) {}
+  try { storages.push(localStorage); } catch (e) {}
+  for (const s of storages) {
+    try {
+      const raw = s.getItem(PERSIST_KEY);
+      if (!raw) continue;
+      const data = JSON.parse(raw);
+      if (data && typeof data === "object") return data;
+    } catch (e) {}
+  }
+  return null;
+}
+
+function writePersist(messages, meta) {
+  const data = JSON.stringify({ messages: messages || [], meta: meta || {} });
+  const storages = [];
+  try { storages.push(sessionStorage); } catch (e) {}
+  try { storages.push(localStorage); } catch (e) {}
+  for (const s of storages) {
+    try { s.setItem(PERSIST_KEY, data); } catch (e) {}
+  }
+}
+
+// ── 인메모리 스토어: iframe 유지 시 보존, 재생성 시 영속 스토리지에서 복원 ──
 const store = (() => {
   if (typeof window === "undefined") {
     return { messages: [], meta: {}, poller: null };
   }
   if (!window[STORE_KEY] || typeof window[STORE_KEY] !== "object") {
-    window[STORE_KEY] = { messages: [], meta: {}, poller: null };
+    const restored = readPersist();
+    window[STORE_KEY] = {
+      messages: (restored && Array.isArray(restored.messages)) ? restored.messages : [],
+      meta: (restored && typeof restored.meta === "object") ? restored.meta : {},
+      poller: null
+    };
   }
   return window[STORE_KEY];
 })();
@@ -522,6 +556,7 @@ function getMessages() {
 
 function setMessages(items) {
   store.messages = Array.isArray(items) ? items : [];
+  writePersist(store.messages, store.meta);
 }
 
 function getMeta() {
@@ -530,6 +565,7 @@ function getMeta() {
 
 function setMeta(meta) {
   store.meta = meta && typeof meta === "object" ? meta : {};
+  writePersist(store.messages, store.meta);
 }
 
 function parseMaybeJson(value) {
@@ -800,8 +836,16 @@ function workflowQuestion(answerRow, memoRow, mergedRow) {
 
 function resolveFromWorkflow(answerRow, memoRow, mergedRow) {
   const meta = getMeta();
-  const pendingQuestion = safeText(meta.pendingQuestion);
-  if (!pendingQuestion) return;
+  let pendingQuestion = safeText(meta.pendingQuestion);
+
+  // pendingQuestion이 store에서 사라진 경우(iframe 재생성 등): pending 메시지에서 복원
+  if (!pendingQuestion) {
+    const messages = getMessages();
+    const pendingMsg = messages.find(m => m.role === "assistant" && m.status === "pending");
+    if (!pendingMsg) return;
+    pendingQuestion = safeText(pendingMsg.question || "");
+    if (!pendingQuestion) return;
+  }
 
   const answerText = safeText(
     answerRow.output_response ||
