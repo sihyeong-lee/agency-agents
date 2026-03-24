@@ -500,11 +500,36 @@ body {
 (() => {
 const STORE_KEY = "__elvisChatState";
 const PERSIST_KEY = "elvis_chat_v4";
+const PARENT_KEY = "__elvisChatPersist_v4";
 const POLL_MS = 1800;
 let refreshLock = false;
 
-// ── 영속 스토리지: sessionStorage → localStorage 순으로 시도 ──
+function writeToParent(data) {
+  const wins = [];
+  try { if (window.parent && window.parent !== window) wins.push(window.parent); } catch(e) {}
+  try { if (window.top && window.top !== window && window.top !== window.parent) wins.push(window.top); } catch(e) {}
+  for (const w of wins) {
+    try { w[PARENT_KEY] = data; return true; } catch(e) {}
+  }
+  return false;
+}
+
+function readFromParent() {
+  const wins = [];
+  try { if (window.parent && window.parent !== window) wins.push(window.parent); } catch(e) {}
+  try { if (window.top && window.top !== window && window.top !== window.parent) wins.push(window.top); } catch(e) {}
+  for (const w of wins) {
+    try { const d = w[PARENT_KEY]; if (d && typeof d === "object") return d; } catch(e) {}
+  }
+  return null;
+}
+
+// ── 영속 스토리지: 부모 창 → sessionStorage → localStorage 순으로 시도 ──
 function readPersist() {
+  // 1순위: 부모 창 (iframe 재생성 후에도 유지됨)
+  const fromParent = readFromParent();
+  if (fromParent) return fromParent;
+  // 2순위: sessionStorage → localStorage
   const storages = [];
   try { storages.push(sessionStorage); } catch (e) {}
   try { storages.push(localStorage); } catch (e) {}
@@ -520,12 +545,16 @@ function readPersist() {
 }
 
 function writePersist(messages, meta) {
-  const data = JSON.stringify({ messages: messages || [], meta: meta || {} });
+  const data = { messages: messages || [], meta: meta || {} };
+  // 1순위: 부모 창
+  writeToParent(data);
+  // 2순위: sessionStorage → localStorage
+  const str = JSON.stringify(data);
   const storages = [];
   try { storages.push(sessionStorage); } catch (e) {}
   try { storages.push(localStorage); } catch (e) {}
   for (const s of storages) {
-    try { s.setItem(PERSIST_KEY, data); } catch (e) {}
+    try { s.setItem(PERSIST_KEY, str); } catch (e) {}
   }
 }
 
@@ -1060,4 +1089,4 @@ store.poller = setInterval(refreshFromWorkflow, POLL_MS);
   - output -> `3(dataset)` 연결
   - `sendDataToOutput(payload)` 구조
   - polling 기반 `getDataset({ target: 1/2/3 })`
-- 상태 저장은 `localStorage`가 아니라 `window.__elvisChatState` 메모리를 사용한다.
+- 상태 저장 우선순위: `window.parent[PARENT_KEY]` → `sessionStorage` → `localStorage` → `window.__elvisChatState`. iframe 재생성 후에도 부모 창을 통해 복원된다.
