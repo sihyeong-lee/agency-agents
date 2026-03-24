@@ -39,15 +39,15 @@
 ```html
 <div class="elvis-chat-page">
   <div class="header">
-    <button type="button" class="header-title-btn" onclick="window.__navigateMenu && window.__navigateMenu(1)">
+    <button type="button" class="header-title-btn" onclick="window.__navigateMenu && window.__navigateMenu('HOME')">
       <span class="dot"></span>
       <span class="header-title">ELVIS</span>
     </button>
 
     <div class="header-actions">
-      <button type="button" class="menu-btn" onclick="window.__navigateMenu && window.__navigateMenu(1)">HOME</button>
+      <button type="button" class="menu-btn" onclick="window.__navigateMenu && window.__navigateMenu('HOME')">HOME</button>
       <button type="button" class="menu-btn is-active">AI노무사</button>
-      <button type="button" class="menu-btn" onclick="window.__navigateMenu && window.__navigateMenu(3)">추후 개발</button>
+      <button type="button" class="menu-btn" onclick="window.__navigateMenu && window.__navigateMenu('추후 개발')">추후 개발</button>
       <button type="button" class="icon-btn" title="대화 초기화" onclick="window.__resetChat && window.__resetChat()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 5v14M5 12h14"/>
@@ -967,6 +967,9 @@ async function submitQuestion() {
   }];
 
   try {
+    if (typeof sendDataToOutput !== "function") {
+      throw new Error("sendDataToOutput 함수를 찾을 수 없습니다. 샌드박스 output 포트가 노드3(dataset)에 연결됐는지 확인하세요.");
+    }
     sendDataToOutput(payload);
     if (input) {
       input.value = "";
@@ -975,8 +978,8 @@ async function submitQuestion() {
     showStatus("질문을 전달했습니다. 답변 생성을 기다리는 중입니다.");
     toggleSubmitDisabled(true);
   } catch (error) {
-    console.error(error);
-    showStatus("질문 전달 중 오류가 발생했습니다. `샌드박스_노무상담챗_Elvis(output) -> 3(dataset)` 연결을 확인해 주세요.");
+    console.error("[Elvis] sendDataToOutput 실패:", error);
+    showStatus("전달 오류: " + String(error && error.message || error));
     toggleSubmitDisabled(false);
   }
 }
@@ -1009,22 +1012,22 @@ function useSuggestion(text) {
   handleComposerInput(input);
 }
 
-function navigateMenu(menuNumber) {
-  const menuNo = Number(menuNumber);
-  if (!menuNo || menuNo < 1) {
-    console.warn("invalid menu number:", menuNumber);
+function navigateMenu(menuName) {
+  const name = String(menuName || "").trim();
+  if (!name) {
+    console.warn("invalid menu name:", menuName);
     return false;
   }
 
   const targets = [];
-  if (typeof window !== "undefined") targets.push(window);
-  if (typeof window !== "undefined" && window.parent && window.parent !== window) targets.push(window.parent);
-  if (typeof window !== "undefined" && window.top && window.top !== window && window.top !== window.parent) targets.push(window.top);
+  try { targets.push(window); } catch(e) {}
+  try { if (window.parent && window.parent !== window) targets.push(window.parent); } catch(e) {}
+  try { if (window.top && window.top !== window && window.top !== window.parent) targets.push(window.top); } catch(e) {}
 
   for (const target of targets) {
     try {
       if (target && typeof target.changeApplicationMenu === "function") {
-        target.changeApplicationMenu(menuNo);
+        target.changeApplicationMenu(name);
         return true;
       }
     } catch (error) {
@@ -1035,14 +1038,14 @@ function navigateMenu(menuNumber) {
   for (const target of targets) {
     try {
       if (target && typeof target.postMessage === "function") {
-        target.postMessage({ type: "changeApplicationMenu", menuNumber: menuNo }, "*");
+        target.postMessage({ type: "changeApplicationMenu", menuName: name }, "*");
       }
     } catch (error) {
       console.warn("postMessage fallback failed", error);
     }
   }
 
-  console.warn("menu navigation handler not found:", menuNo);
+  console.warn("menu navigation handler not found:", name);
   return false;
 }
 
