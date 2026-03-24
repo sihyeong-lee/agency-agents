@@ -498,12 +498,18 @@ body {
 
 ```javascript
 (() => {
-const CHAT_KEY = "elvis_labor_chat_messages_v3";
-const META_KEY = "elvis_labor_chat_meta_v3";
+const STORE_KEY = "__elvisChatState";
 const POLL_MS = 1800;
 let refreshLock = false;
-let memoryMessages = [];
-let memoryMeta = {};
+const store = (() => {
+  if (typeof window === "undefined") {
+    return { messages: [], meta: {}, poller: null };
+  }
+  if (!window[STORE_KEY] || typeof window[STORE_KEY] !== "object") {
+    window[STORE_KEY] = { messages: [], meta: {}, poller: null };
+  }
+  return window[STORE_KEY];
+})();
 
 function safeText(value, fallback = "") {
   const text = String(value ?? "").trim();
@@ -511,43 +517,19 @@ function safeText(value, fallback = "") {
 }
 
 function getMessages() {
-  try {
-    const raw = localStorage.getItem(CHAT_KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    return Array.isArray(memoryMessages) ? memoryMessages : [];
-  }
+  return Array.isArray(store.messages) ? store.messages : [];
 }
 
 function setMessages(items) {
-  const next = Array.isArray(items) ? items : [];
-  memoryMessages = next;
-  try {
-    localStorage.setItem(CHAT_KEY, JSON.stringify(next));
-  } catch (error) {
-    console.warn("localStorage setMessages failed", error);
-  }
+  store.messages = Array.isArray(items) ? items : [];
 }
 
 function getMeta() {
-  try {
-    const raw = localStorage.getItem(META_KEY);
-    const parsed = raw ? JSON.parse(raw) : {};
-    return parsed && typeof parsed === "object" ? parsed : {};
-  } catch (error) {
-    return memoryMeta && typeof memoryMeta === "object" ? memoryMeta : {};
-  }
+  return store.meta && typeof store.meta === "object" ? store.meta : {};
 }
 
 function setMeta(meta) {
-  const next = meta && typeof meta === "object" ? meta : {};
-  memoryMeta = next;
-  try {
-    localStorage.setItem(META_KEY, JSON.stringify(next));
-  } catch (error) {
-    console.warn("localStorage setMeta failed", error);
-  }
+  store.meta = meta && typeof meta === "object" ? meta : {};
 }
 
 function parseMaybeJson(value) {
@@ -637,10 +619,17 @@ function replacePendingAssistant(payload) {
   setMessages(messages);
 }
 
-function recoverPendingAfterReload() {
+function markPendingAsFailedIfStale() {
   const meta = getMeta();
   const pendingQuestion = safeText(meta.pendingQuestion);
-  if (!pendingQuestion) return false;
+  const submittedAt = safeText(meta.submittedAt);
+  if (!pendingQuestion || !submittedAt) return false;
+
+  const submittedTime = new Date(submittedAt).getTime();
+  const ageMs = Date.now() - submittedTime;
+  if (!Number.isFinite(submittedTime) || !Number.isFinite(ageMs) || ageMs < 120000) {
+    return false;
+  }
 
   const messages = getMessages().map(item => {
     if (item && item.role === "assistant" && item.status === "pending") {
@@ -657,7 +646,7 @@ function recoverPendingAfterReload() {
   setMeta({
     pendingQuestion: "",
     lastResolvedSignature: safeText(meta.lastResolvedSignature),
-    recoveredAt: new Date().toISOString()
+    staleRecoveredAt: new Date().toISOString()
   });
   return true;
 }
@@ -998,22 +987,22 @@ renderThread();
 const initialInput = document.getElementById("questionInput");
 autoResize(initialInput);
 toggleSubmitDisabled(true);
-if (recoverPendingAfterReload()) {
+if (markPendingAsFailedIfStale()) {
   renderThread();
-  showStatus("이전 실행이 중단되어 입력을 다시 열었습니다. 질문을 다시 실행해 주세요.");
+  showStatus("이전 질문 응답이 오래 지연되어 입력을 다시 열었습니다. 질문을 다시 실행해 주세요.");
   toggleSubmitDisabled(false);
 } else if (isPending()) {
   showStatus("이전 질문의 답변 상태를 확인하는 중입니다.");
 }
 refreshFromWorkflow();
-if (window.__elvisChatPoller) {
+if (store.poller) {
   try {
-    clearInterval(window.__elvisChatPoller);
+    clearInterval(store.poller);
   } catch (error) {
     console.warn("clear previous poller failed", error);
   }
 }
-window.__elvisChatPoller = setInterval(refreshFromWorkflow, POLL_MS);
+store.poller = setInterval(refreshFromWorkflow, POLL_MS);
 })();
 ```
 
@@ -1027,3 +1016,4 @@ window.__elvisChatPoller = setInterval(refreshFromWorkflow, POLL_MS);
   - output -> `3(dataset)` 연결
   - `sendDataToOutput(payload)` 구조
   - polling 기반 `getDataset({ target: 1/2/3 })`
+- 상태 저장은 `localStorage`가 아니라 `window.__elvisChatState` 메모리를 사용한다.
