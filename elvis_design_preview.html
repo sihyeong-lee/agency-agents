@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELVIS 디자인 샘플 A / B / C</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background: #f0f0f0;
+  padding: 32px 24px;
+}
+.page-title {
+  text-align: center;
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 28px;
+  letter-spacing: 0.04em;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,.18);
+}
+.label {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 0 14px;
+  letter-spacing: 0.06em;
+  color: #333;
+}
+
+/* ── 공통 채팅 구조 ── */
+.chat { height: 520px; display: flex; flex-direction: column; }
+.chat-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; height: 52px; flex-shrink: 0;
+}
+.logo { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; }
+.dot { width: 8px; height: 8px; border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+.nav { display: flex; gap: 6px; }
+.nav-btn {
+  font-size: 11px; padding: 5px 11px; border-radius: 999px; border: 1px solid;
+  cursor: pointer; font-family: inherit;
+}
+.messages { flex: 1; overflow: hidden; padding: 16px 14px 8px; display: flex; flex-direction: column; gap: 12px; }
+.msg-user { display: flex; justify-content: flex-end; }
+.msg-ai { display: flex; align-items: flex-start; gap: 8px; }
+.avatar {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.03em; margin-top: 2px;
+}
+.bubble { padding: 10px 13px; border-radius: 14px; font-size: 12px; line-height: 1.65; max-width: 80%; }
+.bubble-user { border-radius: 14px 14px 3px 14px; }
+.bubble-ai { border-radius: 3px 14px 14px 14px; }
+.badge-row { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
+.badge { font-size: 10px; padding: 3px 8px; border-radius: 999px; border: 1px solid; }
+.typing-wrap { display: flex; align-items: flex-start; gap: 8px; }
+.typing { display: flex; gap: 3px; align-items: center; padding: 10px 13px; border-radius: 3px 14px 14px 14px; }
+.typing span { width: 5px; height: 5px; border-radius: 50%; animation: bounce 1.1s infinite; }
+.typing span:nth-child(2) { animation-delay:.18s }
+.typing span:nth-child(3) { animation-delay:.36s }
+@keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-4px)} }
+.input-area { flex-shrink: 0; padding: 8px 12px 14px; }
+.input-box {
+  display: flex; align-items: center; gap: 8px;
+  border: 1.5px solid; border-radius: 12px; padding: 9px 10px 9px 13px;
+}
+.input-box input {
+  flex: 1; border: none; outline: none; font-family: inherit; font-size: 12px;
+  background: transparent;
+}
+.send-btn {
+  width: 28px; height: 28px; border-radius: 8px; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.send-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.status-bar { font-size: 10px; padding: 0 14px 6px; opacity: .6; }
+
+
+/* ════════════════════════════
+   A — Dark Navy
+════════════════════════════ */
+.a .chat { background: #0d0f14; color: #e8eaf0; }
+.a .chat-header { background: #131620; border-bottom: 1px solid #1e2235; }
+.a .logo { color: #e8eaf0; }
+.a .dot { background: #3b82f6; }
+.a .nav-btn { color: #9aa3b8; border-color: #2a2f45; background: transparent; }
+.a .nav-btn.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+.a .bubble-user { background: #2563eb; color: #fff; }
+.a .bubble-ai { background: #1a1d2e; color: #dde1ef; }
+.a .avatar { background: #2563eb; color: #fff; }
+.a .typing { background: #1a1d2e; }
+.a .typing span { background: #4b73d4; }
+.a .badge { color: #7b99e0; border-color: #1e2e5c; background: #111729; }
+.a .input-box { border-color: #1e2235; background: #131620; }
+.a .input-box input { color: #e8eaf0; }
+.a .input-box input::placeholder { color: #3a4060; }
+.a .send-btn { background: #2563eb; color: #fff; }
+.a .status-bar { color: #6b7ab0; }
+
+
+/* ════════════════════════════
+   B — Deep Charcoal + Gold
+════════════════════════════ */
+.b .chat { background: #111110; color: #f0ede8; }
+.b .chat-header { background: #1c1c1b; border-bottom: 1px solid #2a2a27; }
+.b .logo { color: #f0ede8; }
+.b .dot { background: #d4a44c; }
+.b .nav-btn { color: #8a8880; border-color: #2e2e2b; background: transparent; }
+.b .nav-btn.active { background: #d4a44c; color: #111; border-color: #d4a44c; }
+.b .bubble-user { background: #2a2a27; color: #f0ede8; border: 1px solid #3a3a36; }
+.b .bubble-ai { background: #1f1f1e; color: #ede8e0; border: 1px solid #2a2a27; }
+.b .avatar { background: #d4a44c; color: #111; }
+.b .typing { background: #1f1f1e; border: 1px solid #2a2a27; }
+.b .typing span { background: #c49840; }
+.b .badge { color: #c49840; border-color: #3a3220; background: #1e1b14; }
+.b .input-box { border-color: #2a2a27; background: #1c1c1b; }
+.b .input-box input { color: #f0ede8; }
+.b .input-box input::placeholder { color: #3a3a35; }
+.b .send-btn { background: #d4a44c; color: #111; }
+.b .status-bar { color: #7a7060; }
+
+
+/* ════════════════════════════
+   C — Soft Dark + Green
+════════════════════════════ */
+.c .chat { background: #0f0f0f; color: #f5f5f5; }
+.c .chat-header { background: #161616; border-bottom: 1px solid #202020; }
+.c .logo { color: #f5f5f5; }
+.c .dot { background: #22c55e; }
+.c .nav-btn { color: #777; border-color: #282828; background: transparent; }
+.c .nav-btn.active { background: #1a1a1a; color: #f5f5f5; border-color: #3a3a3a; }
+.c .bubble-user { background: #1a1a1a; color: #f5f5f5; border: 1px solid #2a2a2a; }
+.c .bubble-ai { background: transparent; color: #f0f0f0; }
+.c .avatar { background: #222; color: #f5f5f5; border: 1px solid #333; }
+.c .typing { background: transparent; }
+.c .typing span { background: #555; }
+.c .badge { color: #666; border-color: #282828; background: transparent; }
+.c .input-box { border-color: #222; background: #161616; }
+.c .input-box input { color: #f5f5f5; }
+.c .input-box input::placeholder { color: #333; }
+.c .send-btn { background: #1a1a1a; color: #f5f5f5; border: 1px solid #333; }
+.c .status-bar { color: #444; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<p class="page-title">ELVIS AI노무사 — 디자인 방향 비교 샘플</p>
+
+<div class="grid">
+
+  <!-- ── A ── -->
+  <div>
+    <div class="label">A &nbsp;·&nbsp; Dark Navy</div>
+    <div class="card a">
+      <div class="chat">
+        <div class="chat-header">
+          <div class="logo">
+            <span class="dot"></span>
+            ELVIS
+          </div>
+          <div class="nav">
+            <button class="nav-btn">HOME</button>
+            <button class="nav-btn active">AI노무사</button>
+          </div>
+        </div>
+        <div class="messages">
+          <div class="msg-user">
+            <div class="bubble bubble-user">사내 음주가 징계사유가 될 수 있나요?</div>
+          </div>
+          <div class="msg-ai">
+            <div class="avatar">E</div>
+            <div>
+              <div class="bubble bubble-ai">
+                사내 음주는 취업규칙·사규 위반, 업무 방해, 직장 내 괴롭힘 등 복수의 징계사유를 구성할 수 있습니다.<br><br>
+                판례는 "음주 자체보다 그로 인한 직장 질서 침해 여부"를 핵심 기준으로 판단합니다.
+              </div>
+              <div class="badge-row">
+                <span class="badge">징계 일반</span>
+                <span class="badge">취업규칙</span>
+              </div>
+            </div>
+          </div>
+          <div class="typing-wrap">
+            <div class="avatar" style="width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:#2563eb;color:#fff;margin-top:2px;">E</div>
+            <div class="typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="status-bar">답변을 생성하는 중입니다...</div>
+        <div class="input-area">
+          <div class="input-box">
+            <input type="text" placeholder="질문을 입력하세요" readonly>
+            <button class="send-btn">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── B ── -->
+  <div>
+    <div class="label">B &nbsp;·&nbsp; Charcoal + Gold</div>
+    <div class="card b">
+      <div class="chat">
+        <div class="chat-header">
+          <div class="logo">
+            <span class="dot"></span>
+            ELVIS
+          </div>
+          <div class="nav">
+            <button class="nav-btn">HOME</button>
+            <button class="nav-btn active">AI노무사</button>
+          </div>
+        </div>
+        <div class="messages">
+          <div class="msg-user">
+            <div class="bubble bubble-user">사내 음주가 징계사유가 될 수 있나요?</div>
+          </div>
+          <div class="msg-ai">
+            <div class="avatar">E</div>
+            <div>
+              <div class="bubble bubble-ai">
+                사내 음주는 취업규칙·사규 위반, 업무 방해, 직장 내 괴롭힘 등 복수의 징계사유를 구성할 수 있습니다.<br><br>
+                판례는 "음주 자체보다 그로 인한 직장 질서 침해 여부"를 핵심 기준으로 판단합니다.
+              </div>
+              <div class="badge-row">
+                <span class="badge">징계 일반</span>
+                <span class="badge">취업규칙</span>
+              </div>
+            </div>
+          </div>
+          <div class="typing-wrap">
+            <div class="avatar" style="width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:#d4a44c;color:#111;margin-top:2px;">E</div>
+            <div class="typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="status-bar">답변을 생성하는 중입니다...</div>
+        <div class="input-area">
+          <div class="input-box">
+            <input type="text" placeholder="질문을 입력하세요" readonly>
+            <button class="send-btn">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── C ── -->
+  <div>
+    <div class="label">C &nbsp;·&nbsp; Soft Dark + Green</div>
+    <div class="card c">
+      <div class="chat">
+        <div class="chat-header">
+          <div class="logo">
+            <span class="dot"></span>
+            ELVIS
+          </div>
+          <div class="nav">
+            <button class="nav-btn">HOME</button>
+            <button class="nav-btn active">AI노무사</button>
+          </div>
+        </div>
+        <div class="messages">
+          <div class="msg-user">
+            <div class="bubble bubble-user">사내 음주가 징계사유가 될 수 있나요?</div>
+          </div>
+          <div class="msg-ai">
+            <div class="avatar">E</div>
+            <div>
+              <div class="bubble bubble-ai">
+                사내 음주는 취업규칙·사규 위반, 업무 방해, 직장 내 괴롭힘 등 복수의 징계사유를 구성할 수 있습니다.<br><br>
+                판례는 "음주 자체보다 그로 인한 직장 질서 침해 여부"를 핵심 기준으로 판단합니다.
+              </div>
+              <div class="badge-row">
+                <span class="badge">징계 일반</span>
+                <span class="badge">취업규칙</span>
+              </div>
+            </div>
+          </div>
+          <div class="typing-wrap">
+            <div class="avatar" style="width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:#222;color:#f5f5f5;border:1px solid #333;margin-top:2px;">E</div>
+            <div class="typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <div class="status-bar">답변을 생성하는 중입니다...</div>
+        <div class="input-area">
+          <div class="input-box">
+            <input type="text" placeholder="질문을 입력하세요" readonly>
+            <button class="send-btn">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
