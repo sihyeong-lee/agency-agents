@@ -1,647 +1,648 @@
-﻿# Elvis 홈 화면 샌드박스 코드
+# ELVIS HOME 샌드박스 코드 문서 (v2 — 사이드바 레이아웃)
 
-이 문서는 Elvis 플랫폼의 `HOME` 메뉴에 배치할 `샌드박스_Elvis_홈` 노드용 **실사용 코드 문서**다.
+이 문서는 ELVIS AI 플랫폼의 `HOME` 메뉴 화면인 `샌드박스_Elvis_홈` 노드용 실사용 코드 문서다.
 
-기준:
-
-- Claude가 만든 [claude index.html](d:\AI canvas\새 폴더\claude index.html) 레이아웃을 Elvis용 홈 랜딩으로 변환한 버전이다.
-- HOME은 정적인 브랜드 랜딩 역할을 한다.
-- 질문은 실행하지 않는다.
-- 사용자는 여기서 `AI노무사`로 진입한다.
-- `근거` 메뉴는 없으므로 CTA도 두지 않는다.
-
-노드 설정:
-
-- 노드명: `샌드박스_Elvis_홈`
-- 노드 타입: `샌드박스`
-- 메뉴: `HOME`
-- 입력 포트: 없음
-- 출력 포트: 사용하지 않음
+- 이 샌드박스는 **표시 전용(display-only)** 화면이다. 입력/출력 포트 없음.
+- **좌측 고정 사이드바 + 우측 히어로 영역** 레이아웃이다.
+- 챗봇 샌드박스(`elvis_consult_chat_sandbox_internal_run.md`)는 건드리지 않는다.
 
 ---
 
-## HTML
+## 1. 노드 구조
+
+노드명: `샌드박스_Elvis_홈`
+
+입출력 포트: 없음
+
+샌드박스 편집 설정:
+- `<head>`: 기본 meta 두 줄 유지
+- 외부 CDN: Google Fonts (Inter) 만 허용
+
+메뉴 번호 매핑 (AI Canvas — 절대 변경 금지):
+| 번호 | 메뉴명 |
+|---|---|
+| `1` | HOME |
+| `2` | AI노무사 |
+| `3` | 추후 개발 |
+
+---
+
+## 2. HTML
 
 ```html
-<div class="elvis-home-shell">
-  <header id="homeHeader" class="home-header">
-    <nav class="home-nav home-nav--left">
-      <button type="button" class="nav-pill is-active" onclick="window.__navigateMenu && window.__navigateMenu(1)">HOME</button>
-      <button type="button" class="nav-pill" onclick="window.__navigateMenu && window.__navigateMenu(2)">AI노무사</button>
-      <button type="button" class="nav-pill" onclick="window.__navigateMenu && window.__navigateMenu(3)">추후 개발</button>
-    </nav>
+<div class="elvis-home">
 
-    <button type="button" class="home-logo" onclick="window.__navigateMenu && window.__navigateMenu(1)" aria-label="Elvis 홈으로 이동">
-      <span class="home-logo__el">EL</span><span class="home-logo__vis">vis</span>
-    </button>
+  <!-- ── 좌측 사이드바 ── -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <button
+        type="button"
+        class="sidebar-logo"
+        onclick="window.__navigateMenu && window.__navigateMenu(1)"
+        aria-label="홈으로 이동"
+      >
+        <span class="logo-dot"></span>
+        <span class="logo-text">ELVIS</span>
+      </button>
 
-    <div class="home-header__right">
-      <span class="availability">Internal beta open</span>
-      <button type="button" class="btn-primary" onclick="window.__navigateMenu && window.__navigateMenu(2)">AI노무사 시작</button>
-      <button type="button" class="btn-text" onclick="window.__navigateMenu && window.__navigateMenu(3)">추후 개발 보기</button>
-    </div>
-  </header>
+      <nav class="sidebar-nav" aria-label="메인 내비게이션">
+        <button
+          type="button"
+          class="nav-item is-active"
+          onclick="window.__navigateMenu && window.__navigateMenu(1)"
+        >
+          <span class="nav-icon">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          HOME
+        </button>
 
-  <main>
-    <section class="hero">
-      <p class="hero-tag">Knowledge Platform for Labor Practice</p>
-      <h1>
-        Your shortcut<br>
-        to <em>usable</em> labor knowledge<br>
-        in one place.
-      </h1>
-      <p class="hero-sub">
-        Elvis는 회사의 규정, 내부 사례, 판례, 행정해석, 실무 문안을 한 곳에 모아
-        필요한 순간 바로 찾고, 묻고, 활용할 수 있게 만든 플랫폼입니다.
-      </p>
-      <div class="hero-tags">
-        <div class="tag-chip blue">규정</div>
-        <div class="tag-chip orange">내부 사례</div>
-        <div class="tag-chip purple">판례</div>
-        <div class="tag-chip red">행정해석</div>
-        <div class="tag-chip green">노무상담</div>
-        <div class="tag-chip teal">문안 작성</div>
-      </div>
-    </section>
+        <button
+          type="button"
+          class="nav-item"
+          onclick="window.__navigateMenu && window.__navigateMenu(2)"
+        >
+          <span class="nav-icon">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+          </span>
+          AI노무사
+        </button>
 
-    <div class="gallery">
-      <article class="card card-1" onclick="window.__navigateMenu && window.__navigateMenu(2)">
-        <div class="card-placeholder">
-          <div class="card-icon">쨌</div>
-          <div class="card-label">Ask the AI labor counsel</div>
-          <div class="card-sub">질문을 입력하고 바로 답변을 받습니다.</div>
-        </div>
-      </article>
-
-      <article class="card card-2">
-        <div class="card-placeholder">
-          <div class="card-icon">쨰</div>
-          <div class="card-label">Internal cases that actually matter</div>
-          <div class="card-sub">유사 사례와 양정 판단을 실무 중심으로 연결합니다.</div>
-        </div>
-      </article>
-
-      <article class="card card-3">
-        <div class="card-placeholder">
-          <div class="card-icon">쨜</div>
-          <div class="card-label">Official rules, precedents, interpretations</div>
-          <div class="card-sub">조문, 사건번호, 근거를 답변 안에서 바로 읽습니다.</div>
-        </div>
-      </article>
-
-      <article class="card card-4">
-        <div class="card-placeholder">
-          <div class="card-icon">쨶</div>
-          <div class="card-label">Write with structure, not guesswork</div>
-          <div class="card-sub">앞으로 의견서와 문안 작성 기능도 같은 플랫폼에 붙습니다.</div>
-        </div>
-      </article>
-
-      <article class="card card-5" onclick="window.__navigateMenu && window.__navigateMenu(3)">
-        <div class="card-placeholder">
-          <div class="card-icon">쨄</div>
-          <div class="card-label">What comes next</div>
-          <div class="card-sub">지식문서, 작성도구, 검색 허브가 순차적으로 추가됩니다.</div>
-        </div>
-      </article>
+        <button
+          type="button"
+          class="nav-item"
+          onclick="window.__navigateMenu && window.__navigateMenu(3)"
+        >
+          <span class="nav-icon">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </span>
+          추후 개발
+        </button>
+      </nav>
     </div>
 
-    <section class="section">
-      <div class="section-label">How Elvis works</div>
-      <div class="process-list">
-        <div class="process-item">
-          <div class="process-num">01</div>
-          <div class="process-title">Find</div>
-          <div class="process-desc">규정, 내부 사례, 판례, 행정해석, 웹 보완 근거를 하나의 흐름에서 연결합니다.</div>
+    <div class="sidebar-bottom">
+      <span class="sidebar-brand-label">ER AI Platform</span>
+    </div>
+  </aside>
+
+  <!-- ── 우측 메인 콘텐츠 ── -->
+  <main class="main-content">
+    <div class="hero-wrap">
+
+      <!-- 히어로 텍스트 블록 -->
+      <div class="hero-text">
+        <p class="hero-eyebrow">ER AI Platform</p>
+        <h1 class="hero-headline">
+          <span class="headline-main">ELVIS</span>
+        </h1>
+        <p class="hero-tagline">ALL + Wise — ER팀을 위한 AI 노동법 플랫폼</p>
+        <p class="hero-desc">
+          법령, 판례, 행정해석, 내부 사례를 연결해<br>
+          실무형 노동 자문을 대화처럼 제공합니다.
+        </p>
+
+        <div class="chip-row">
+          <span class="chip">AI노무사</span>
+          <span class="chip">내부 사례 기반</span>
+          <span class="chip">판례·행정해석</span>
+          <span class="chip">실무형 자문</span>
         </div>
-        <div class="process-item">
-          <div class="process-num">02</div>
-          <div class="process-title">Judge</div>
-          <div class="process-desc">질문에 맞는 판단 기준과 내부 유사 사례를 바탕으로 결론을 더 명확하게 정리합니다.</div>
-        </div>
-        <div class="process-item">
-          <div class="process-num">03</div>
-          <div class="process-title">Use</div>
-          <div class="process-desc">답변을 읽고 끝내지 않고, 실제 상담·보고·문안 작성까지 이어지도록 플랫폼을 확장합니다.</div>
+
+        <div class="cta-row">
+          <button
+            type="button"
+            class="btn-cta"
+            onclick="window.__navigateMenu && window.__navigateMenu(2)"
+          >
+            AI노무사 시작하기
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
         </div>
       </div>
-    </section>
+
+      <!-- 우측 패널 카드 -->
+      <div class="panel-wrap">
+        <div class="panel-card">
+          <div class="panel-header">
+            <span class="panel-live-dot"></span>
+            <span class="panel-title">현재 사용 가능</span>
+          </div>
+
+          <ul class="panel-list">
+            <li class="panel-item">
+              <span class="pi-icon">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span>근로기준법·판례 실시간 자문</span>
+            </li>
+            <li class="panel-item">
+              <span class="pi-icon">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span>내부 징계·조사 사례 비교</span>
+            </li>
+            <li class="panel-item">
+              <span class="pi-icon">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span>행정해석·고용부 지침 자동 참조</span>
+            </li>
+            <li class="panel-item">
+              <span class="pi-icon">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+              <span>대화형 질의로 맥락 유지</span>
+            </li>
+          </ul>
+
+          <div class="panel-divider"></div>
+
+          <button
+            type="button"
+            class="panel-link"
+            onclick="window.__navigateMenu && window.__navigateMenu(2)"
+          >
+            AI노무사로 이동
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
   </main>
-
-  <footer class="home-footer">
-    <div class="logo-sm">ELVIS</div>
-    <span>Whole Knowledge, Used Wisely.</span>
-    <span>Internal labor knowledge platform</span>
-  </footer>
 </div>
 ```
 
 ---
 
-## CSS
+## 3. CSS
 
 ```css
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --black: #111111;
-  --gray: #7d7d79;
-  --light: #f5f5f3;
-  --border: #e8e8e4;
-}
-
-body {
-  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
-  background: #ffffff;
-  color: var(--black);
-  overflow-x: hidden;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  width: 100%;
-  min-height: 100%;
-}
-
-.elvis-home-shell {
-  min-height: 100dvh;
-  width: 100%;
-  overflow-x: hidden;
+  height: 100%;
   background: #fff;
 }
 
-main {
-  width: 100%;
-  overflow-x: hidden;
+body {
+  font-family: 'Inter', 'Segoe UI', 'Noto Sans KR', sans-serif;
+  color: #111;
+  -webkit-font-smoothing: antialiased;
 }
 
-.home-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 24px 40px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
-}
-
-.home-header.scrolled {
-  border-bottom-color: var(--border);
-}
-
-.home-nav {
+/* ── 전체 레이아웃 ── */
+.elvis-home {
   display: flex;
-  gap: 8px;
-}
-
-.home-nav--left {
-  justify-content: flex-start;
-}
-
-.nav-pill {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--black);
-  background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 7px 14px;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
-}
-
-.nav-pill:hover {
-  background: var(--light);
-}
-
-.nav-pill.is-active {
-  background: var(--light);
-}
-
-.home-logo {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  text-align: center;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.home-logo__vis {
-  font-style: italic;
-}
-
-.home-header__right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 16px;
-}
-
-.availability {
-  font-size: 12px;
-  color: #2d9c5a;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.availability::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  background: #2d9c5a;
-  border-radius: 50%;
-  display: inline-block;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.btn-primary {
-  font-size: 13px;
-  font-weight: 500;
-  color: #fff;
-  background: var(--black);
-  border: none;
-  padding: 9px 20px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  letter-spacing: 0.01em;
-}
-
-.btn-primary:hover {
-  opacity: 0.78;
-}
-
-.btn-text {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--black);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-.btn-text:hover {
-  opacity: 1;
-}
-
-.hero {
-  width: min(1200px, calc(100% - 80px));
-  margin: 0 auto;
-  padding: 160px 0 100px;
-}
-
-.hero-tag {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 28px;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(48px, 7vw, 96px);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--black);
-  max-width: 860px;
-}
-
-.hero h1 em {
-  font-style: italic;
-  font-weight: 400;
-}
-
-.hero-sub {
-  margin-top: 36px;
-  font-size: 14px;
-  color: var(--gray);
-  max-width: 520px;
-  line-height: 1.7;
-}
-
-.hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 20px;
-  align-items: center;
-}
-
-.tag-chip {
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 12px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  color: var(--black);
-}
-
-.tag-chip::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.tag-chip.blue::before   { background: #4a90d9; }
-.tag-chip.orange::before { background: #e87c3e; }
-.tag-chip.purple::before { background: #9b59b6; }
-.tag-chip.red::before    { background: #e74c3c; }
-.tag-chip.green::before  { background: #27ae60; }
-.tag-chip.teal::before   { background: #1abc9c; }
-
-.gallery {
-  width: min(1200px, calc(100% - 80px));
-  margin: 40px auto 0;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 16px;
-  overflow: visible;
-  padding: 0;
-}
-
-.card {
-  min-width: 0;
-  height: 440px;
-  border-radius: 16px;
+  height: 100dvh;
   overflow: hidden;
-  position: relative;
-  background: var(--light);
-  transition: transform 0.3s ease;
-  cursor: default;
 }
 
-.card:hover { transform: translateY(-6px); }
-.card.is-clickable,
-.card[onclick] { cursor: pointer; }
-
-.card-1 { grid-column: span 4; }
-.card-2 { grid-column: span 3; }
-.card-3 { grid-column: span 5; }
-.card-4 { grid-column: span 6; }
-.card-5 { grid-column: span 6; }
-
-.card-placeholder {
-  width: 100%;
-  height: 100%;
+/* ────────────────────────────
+   사이드바
+──────────────────────────── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 28px;
+  justify-content: space-between;
+  border-right: 1px solid #ebebeb;
+  background: #fafafa;
+  padding: 24px 14px;
 }
 
-.card-1 { background: #f0ede6; }
-.card-2 { background: #c94a1a; }
-.card-3 { background: #d4e8f0; }
-.card-4 { background: #1a1a1a; }
-.card-5 { background: #f7c948; }
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
 
-.card-label {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 22px;
+/* 로고 */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background .15s;
+}
+.sidebar-logo:hover { background: #f0f0f0; }
+
+.logo-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: blink 2.2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .25; }
+}
+
+.logo-text {
+  font-size: 15px;
   font-weight: 700;
-  line-height: 1.2;
+  letter-spacing: 0.1em;
+  color: #111;
 }
 
-.card-sub {
-  font-size: 12px;
-  margin-top: 8px;
-  opacity: 0.7;
-  line-height: 1.6;
+/* 네비게이션 */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.card-1 .card-label { color: #1a1a1a; }
-.card-2 .card-label, .card-2 .card-sub { color: #ffffff; }
-.card-3 .card-label { color: #1a1a1a; }
-.card-4 .card-label, .card-4 .card-sub { color: #ffffff; }
-.card-5 .card-label { color: #1a1a1a; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #666;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 400;
+  cursor: pointer;
+  text-align: left;
+  transition: background .13s, color .13s;
+}
+.nav-item:hover {
+  background: #efefef;
+  color: #111;
+}
+.nav-item.is-active {
+  background: #111;
+  color: #fff;
+  font-weight: 500;
+}
+.nav-item.is-active .nav-icon { opacity: 1; }
 
-.card-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.25);
+.nav-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  flex-shrink: 0;
+  opacity: .55;
+}
+.nav-item.is-active .nav-icon,
+.nav-item:hover .nav-icon { opacity: 1; }
+
+/* 하단 브랜드 */
+.sidebar-bottom { padding: 0 4px; }
+.sidebar-brand-label {
+  font-size: 11px;
+  color: #bbb;
+  letter-spacing: 0.04em;
+}
+
+/* ────────────────────────────
+   메인 콘텐츠
+──────────────────────────── */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  padding: 40px 48px;
+}
+
+.hero-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 56px;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* ── 히어로 텍스트 ── */
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
   margin-bottom: 16px;
 }
 
-.section {
-  width: min(1200px, calc(100% - 80px));
-  padding: 100px 0;
-  margin: 0 auto;
+.hero-headline {
+  margin-bottom: 16px;
 }
-
-.section-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 48px;
-  border-top: 1px solid var(--border);
-  padding-top: 20px;
-}
-
-.process-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-
-.process-item {
-  padding: 32px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  transition: background 0.2s;
-}
-
-.process-item:hover {
-  background: var(--light);
-}
-
-.process-num {
-  font-size: 11px;
-  color: var(--gray);
-  margin-bottom: 20px;
-  font-variant-numeric: tabular-nums;
-}
-
-.process-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 22px;
-  font-weight: 400;
-  margin-bottom: 12px;
-}
-
-.process-desc {
-  font-size: 13px;
-  color: var(--gray);
-  line-height: 1.7;
-}
-
-.home-footer {
-  border-top: 1px solid var(--border);
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: var(--gray);
-}
-
-.logo-sm {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 16px;
+.headline-main {
+  display: block;
+  font-size: clamp(52px, 7vw, 80px);
   font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--black);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #111;
 }
 
-@media (max-width: 960px) {
-  .home-header {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    justify-items: start;
-    padding: 20px 18px;
-  }
+.hero-tagline {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
 
-  .home-header__right {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
+.hero-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
 
-  .hero {
-    width: calc(100% - 36px);
-    padding: 168px 0 72px;
-  }
+/* 칩 */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 32px;
+}
+.chip {
+  font-size: 12px;
+  color: #555;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  padding: 5px 12px;
+  background: #fff;
+  letter-spacing: 0.01em;
+}
 
-  .gallery {
-    width: calc(100% - 36px);
-    grid-template-columns: 1fr;
-    margin-top: 32px;
-  }
+/* CTA */
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
-  .process-list {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 22px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  letter-spacing: 0.01em;
+}
+.btn-cta:hover { background: #333; }
+.btn-cta:active { transform: scale(.97); }
 
-  .section {
-    width: calc(100% - 36px);
-    padding: 72px 0;
-  }
+/* ── 패널 카드 ── */
+.panel-wrap { flex-shrink: 0; width: 260px; }
 
-  .home-footer {
-    padding: 28px 18px;
-    flex-direction: column;
-    gap: 10px;
+.panel-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 22px 20px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+.panel-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: blink 2.2s ease-in-out infinite;
+}
+.panel-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+  letter-spacing: 0.03em;
+}
+
+.panel-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 20px;
+}
+.panel-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.5;
+}
+.pi-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f0fdf4;
+  color: #22c55e;
+  margin-top: 1px;
+}
+
+.panel-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin-bottom: 16px;
+}
+
+.panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: gap .15s;
+}
+.panel-link:hover { gap: 8px; }
+
+/* ────────────────────────────
+   반응형
+──────────────────────────── */
+@media (max-width: 860px) {
+  .sidebar {
+    width: 180px;
+    padding: 20px 10px;
+  }
+  .main-content { padding: 32px 28px; }
+  .hero-wrap { gap: 32px; }
+  .panel-wrap { width: 220px; }
+}
+
+@media (max-width: 680px) {
+  .elvis-home { flex-direction: column; overflow: auto; }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-right: none;
+    border-bottom: 1px solid #ebebeb;
+    padding: 0 16px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+  .sidebar-top {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .sidebar-nav { flex-direction: row; gap: 4px; }
+  .nav-item { padding: 6px 10px; font-size: 13px; }
+  .nav-icon { display: none; }
+  .sidebar-bottom { display: none; }
+
+  .main-content {
+    padding: 28px 20px;
     align-items: flex-start;
+    overflow-y: auto;
   }
+  .hero-wrap {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .panel-wrap { width: 100%; }
 }
 ```
 
 ---
 
-## JavaScript
+## 4. JavaScript
 
 ```javascript
-function navigateMenu(menuNumber) {
-  const menuNo = Number(menuNumber);
-  if (!menuNo || menuNo < 1) {
-    console.warn('invalid menu number:', menuNumber);
-    return false;
-  }
-
-  const targets = [];
-  if (typeof window !== 'undefined') targets.push(window);
-  if (typeof window !== 'undefined' && window.parent && window.parent !== window) targets.push(window.parent);
-  if (typeof window !== 'undefined' && window.top && window.top !== window && window.top !== window.parent) targets.push(window.top);
-
-  for (const target of targets) {
-    try {
-      if (target && typeof target.changeApplicationMenu === 'function') {
-        target.changeApplicationMenu(menuNo);
-        return true;
-      }
-    } catch (error) {
-      console.warn('changeApplicationMenu call failed', error);
+(() => {
+  // ── 메뉴 이동 헬퍼 ──────────────────────────────────────────
+  // AI Canvas changeApplicationMenu 는 숫자(1/2/3)로 호출한다.
+  // 절대 이 숫자를 바꾸지 말 것.
+  function navigateMenu(menuNumber) {
+    const menuNo = Number(menuNumber);
+    if (!menuNo) {
+      console.warn('[ELVIS] navigateMenu: invalid menu number', menuNumber);
+      return;
     }
-  }
 
-  for (const target of targets) {
-    try {
-      if (target && typeof target.postMessage === 'function') {
-        target.postMessage({ type: 'changeApplicationMenu', menuNumber: menuNo }, '*');
+    const targets = [];
+    try { targets.push(window); } catch(e) {}
+    try { if (window.parent && window.parent !== window) targets.push(window.parent); } catch(e) {}
+    try { if (window.top && window.top !== window && window.top !== window.parent) targets.push(window.top); } catch(e) {}
+
+    // 1순위: changeApplicationMenu(숫자) 직접 호출
+    for (const target of targets) {
+      try {
+        if (target && typeof target.changeApplicationMenu === 'function') {
+          target.changeApplicationMenu(menuNo);
+          return;
+        }
+      } catch(e) {
+        console.warn('[ELVIS] changeApplicationMenu call failed', e);
       }
-    } catch (error) {
-      console.warn('postMessage fallback failed', error);
     }
+
+    // 2순위: postMessage fallback
+    for (const target of targets) {
+      try {
+        if (target && typeof target.postMessage === 'function') {
+          target.postMessage({ type: 'changeApplicationMenu', menuNumber: menuNo }, '*');
+        }
+      } catch(e) {
+        console.warn('[ELVIS] postMessage fallback failed', e);
+      }
+    }
+
+    console.warn('[ELVIS] navigation handler not found for menu:', menuNo);
   }
 
-  console.warn('menu navigation handler not found:', menuNo);
-  return false;
-}
-
-function goHome() {
-  navigateMenu(1);
-}
-
-function goLabor() {
-  navigateMenu(2);
-}
-
-function goFuture() {
-  navigateMenu(3);
-}
-
-window.__navigateMenu = navigateMenu;
-window.__goHome = goHome;
-window.__goLabor = goLabor;
-window.__goFuture = goFuture;
-
-const header = document.getElementById('homeHeader');
-window.addEventListener('scroll', () => {
-  if (!header) return;
-  header.classList.toggle('scrolled', window.scrollY > 10);
-});
+  window.__navigateMenu = navigateMenu;
+})();
 ```
 
 ---
 
-## 사용 메모
+## 5. 연결 유지 포인트
 
-1. 이 문서는 `claude index.html`의 레이아웃을 Elvis용으로 번역한 기준안이다.
-2. 지금 상태로도 AI Canvas 샌드박스에 바로 붙여 사용할 수 있다.
-3. 디자인을 더 다듬고 싶으면 이 문서를 Claude에게 다시 보내면 된다.
+| 항목 | 유지해야 할 값 | 비고 |
+|---|---|---|
+| HOME 이동 | `navigateMenu(1)` | 로고 클릭, HOME 버튼 |
+| AI노무사 이동 | `navigateMenu(2)` | CTA 버튼, 패널 링크, 사이드바 |
+| 추후 개발 이동 | `navigateMenu(3)` | 사이드바 세 번째 항목 |
+| 전역 함수 | `window.__navigateMenu` | inline onclick 에서 참조 |
+
+**챗봇 파일(`elvis_consult_chat_sandbox_internal_run.md`)은 이번 작업에서 수정하지 않았습니다.**
+
+---
+
+## 6. 붙여넣기 가이드
+
+AI Canvas 샌드박스 노드에서:
+
+1. **HTML** 탭 → `## 2. HTML` 코드블록 내용 전체 붙여넣기
+2. **CSS** 탭 → `## 3. CSS` 코드블록 내용 전체 붙여넣기
+3. **JavaScript** 탭 → `## 4. JavaScript` 코드블록 내용 전체 붙여넣기
+4. 외부 CDN 설정 없이 바로 사용 가능 (Google Fonts는 CSS `@import`로 자동 로드)
