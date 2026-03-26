@@ -137,68 +137,73 @@
         </div>
       </div>
 
-      <!-- 우측 패널 카드 -->
+      <!-- 우측 패널 영역 -->
       <div class="panel-wrap">
+
+        <!-- 현재 사용 가능 카드 -->
         <div class="panel-card">
           <div class="panel-header">
             <span class="panel-live-dot"></span>
             <span class="panel-title">현재 사용 가능</span>
           </div>
-
           <ul class="panel-list">
             <li class="panel-item">
-              <span class="pi-icon">
-                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
-                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </span>
+              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span>근로기준법·판례 실시간 자문</span>
             </li>
             <li class="panel-item">
-              <span class="pi-icon">
-                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
-                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </span>
+              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span>내부 징계·조사 사례 비교</span>
             </li>
             <li class="panel-item">
-              <span class="pi-icon">
-                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
-                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </span>
+              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span>행정해석·고용부 지침 자동 참조</span>
             </li>
             <li class="panel-item">
-              <span class="pi-icon">
-                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"
-                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              </span>
+              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
               <span>대화형 질의로 맥락 유지</span>
             </li>
           </ul>
-
           <div class="panel-divider"></div>
-
-          <button
-            type="button"
-            class="panel-link"
-            onclick="window.__navigateMenu && window.__navigateMenu(2)"
-          >
+          <button type="button" class="panel-link" onclick="window.__navigateMenu && window.__navigateMenu(2)">
             AI노무사로 이동
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
         </div>
+
+        <!-- 챗봇 답변 미리보기 카드 -->
+        <div class="preview-card" onclick="window.__navigateMenu && window.__navigateMenu(2)">
+          <div class="preview-label">답변 예시</div>
+
+          <!-- 사용자 질문 -->
+          <div class="preview-user-row">
+            <div class="preview-user-bubble">사내 음주가 징계사유가 될 수 있나요?</div>
+          </div>
+
+          <!-- AI 답변 -->
+          <div class="preview-ai-row">
+            <div class="preview-avatar">E</div>
+            <div class="preview-ai-bubble">
+              <div class="preview-ai-title">징계 가능, 단 요건 확인 필요</div>
+              <div class="preview-ai-body">취업규칙에 금지 규정이 있고, 업무 방해나 직장 질서 침해가 인정되면 징계 사유가 됩니다. 내부 유사 사례 3건 확인됩니다.</div>
+              <div class="preview-badges">
+                <span class="preview-badge">징계 일반</span>
+                <span class="preview-badge">취업규칙</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 타이핑 인디케이터 -->
+          <div class="preview-typing-row">
+            <div class="preview-avatar preview-avatar-sm">E</div>
+            <div class="preview-typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+
+          <div class="preview-cta-hint">클릭해서 직접 질문해보기 →</div>
+        </div>
+
       </div>
 
     </div>
@@ -443,8 +448,14 @@ body {
 .btn-cta:hover { background: #333; }
 .btn-cta:active { transform: scale(.97); }
 
-/* ── 패널 카드 ── */
-.panel-wrap { flex-shrink: 0; width: 240px; }
+/* ── 패널 영역 ── */
+.panel-wrap {
+  flex-shrink: 0;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .panel-card {
   border: 1px solid #e8e8e8;
@@ -524,6 +535,145 @@ body {
 }
 .panel-link:hover { gap: 8px; }
 
+/* ── 챗봇 미리보기 카드 ── */
+.preview-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 14px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+  cursor: pointer;
+  transition: box-shadow .2s, border-color .2s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.preview-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  border-color: #d0d0d0;
+}
+
+.preview-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #aaa;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* 사용자 말풍선 */
+.preview-user-row {
+  display: flex;
+  justify-content: flex-end;
+}
+.preview-user-bubble {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 14px 14px 3px 14px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 85%;
+}
+
+/* AI 답변 */
+.preview-ai-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.preview-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+.preview-ai-bubble {
+  flex: 1;
+  background: #fafafa;
+  border: 1px solid #ececec;
+  border-radius: 3px 14px 14px 14px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.preview-ai-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+}
+.preview-ai-body {
+  font-size: 11.5px;
+  color: #555;
+  line-height: 1.6;
+}
+.preview-badges {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.preview-badge {
+  font-size: 10.5px;
+  color: #666;
+  background: #f2f2f2;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+/* 타이핑 인디케이터 */
+.preview-typing-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.preview-avatar-sm {
+  width: 20px;
+  height: 20px;
+  font-size: 9px;
+}
+.preview-typing {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 10px;
+  background: #fafafa;
+  border: 1px solid #ececec;
+  border-radius: 3px 12px 12px 12px;
+}
+.preview-typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #bbb;
+  animation: ptBounce 1.2s infinite ease-in-out;
+}
+.preview-typing span:nth-child(2) { animation-delay: .18s; }
+.preview-typing span:nth-child(3) { animation-delay: .36s; }
+@keyframes ptBounce {
+  0%,60%,100% { transform: translateY(0); background: #ccc; }
+  30% { transform: translateY(-4px); background: #888; }
+}
+
+.preview-cta-hint {
+  font-size: 11px;
+  color: #aaa;
+  text-align: right;
+  margin-top: 2px;
+  transition: color .15s;
+}
+.preview-card:hover .preview-cta-hint { color: #555; }
+
 /* ────────────────────────────
    반응형
 ──────────────────────────── */
@@ -534,7 +684,7 @@ body {
   }
   .main-content { padding: 32px 28px; }
   .hero-wrap { gap: 32px; }
-  .panel-wrap { width: 220px; }
+  .panel-wrap { width: 260px; }
 }
 
 @media (max-width: 680px) {
