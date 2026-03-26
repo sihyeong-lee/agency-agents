@@ -244,13 +244,13 @@ body {
   justify-content: space-between;
   border-right: 1px solid #ebebeb;
   background: #fafafa;
-  padding: 24px 14px;
+  padding: 20px 14px;
 }
 
 .sidebar-top {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
 }
 
 /* 로고 */
@@ -349,13 +349,13 @@ body {
   overflow-y: auto;
   display: flex;
   align-items: center;
-  padding: 40px 48px;
+  padding: 24px 36px;
 }
 
 .hero-wrap {
   display: flex;
   align-items: flex-start;
-  gap: 56px;
+  gap: 40px;
   max-width: 900px;
   width: 100%;
 }
@@ -372,15 +372,15 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #999;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .hero-headline {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .headline-main {
   display: block;
-  font-size: clamp(52px, 7vw, 80px);
+  font-size: clamp(40px, 5.5vw, 64px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -388,33 +388,33 @@ body {
 }
 
 .hero-tagline {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #333;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   line-height: 1.5;
 }
 
 .hero-desc {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
   line-height: 1.75;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 /* 칩 */
 .chip-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 32px;
+  gap: 6px;
+  margin-bottom: 20px;
 }
 .chip {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #555;
   border: 1px solid #e0e0e0;
   border-radius: 999px;
-  padding: 5px 12px;
+  padding: 4px 10px;
   background: #fff;
   letter-spacing: 0.01em;
 }
@@ -425,14 +425,14 @@ body {
 .btn-cta {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 12px 22px;
+  gap: 6px;
+  padding: 10px 18px;
   background: #111;
   color: #fff;
   border: none;
   border-radius: 10px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: background .15s, transform .1s;
@@ -442,12 +442,12 @@ body {
 .btn-cta:active { transform: scale(.97); }
 
 /* ── 패널 카드 ── */
-.panel-wrap { flex-shrink: 0; width: 260px; }
+.panel-wrap { flex-shrink: 0; width: 240px; }
 
 .panel-card {
   border: 1px solid #e8e8e8;
-  border-radius: 16px;
-  padding: 22px 20px;
+  border-radius: 14px;
+  padding: 16px 16px;
   background: #fff;
   box-shadow: 0 2px 12px rgba(0,0,0,.04);
 }
@@ -456,7 +456,7 @@ body {
   display: flex;
   align-items: center;
   gap: 7px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 .panel-live-dot {
   width: 7px;
@@ -476,14 +476,14 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 11px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 .panel-item {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
-  font-size: 13px;
+  gap: 8px;
+  font-size: 12px;
   color: #444;
   line-height: 1.5;
 }

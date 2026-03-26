@@ -87,8 +87,9 @@ html, body {
 }
 
 body {
-  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-family: 'Inter', 'Segoe UI', 'Noto Sans KR', sans-serif;
   color: #111;
+  -webkit-font-smoothing: antialiased;
 }
 
 .elvis-chat-page {
@@ -122,20 +123,21 @@ body {
 
 .header-title {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: 0.1em;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
-  background: #2ecc71;
+  width: 9px;
+  height: 9px;
+  background: #22c55e;
   border-radius: 50%;
-  animation: blink 2s infinite;
+  animation: blink 2.2s ease-in-out infinite;
 }
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: .3; }
+  50% { opacity: .25; }
 }
 
 .header-actions {
@@ -169,7 +171,7 @@ body {
 .messages {
   flex: 1;
   overflow-y: auto;
-  padding: 32px 0 16px;
+  padding: 16px 0 8px;
   scroll-behavior: smooth;
 }
 
@@ -356,6 +358,12 @@ body {
   max-width: 780px;
   margin: 0 auto;
   padding: 0 20px;
+  width: 100%;
+}
+
+.empty-state .bubble {
+  max-width: 100%;
+  flex: 1;
 }
 
 .starter-bubble {
