@@ -376,7 +376,7 @@ body {
 
 /* ── 히어로 텍스트 ── */
 .hero-text {
-  flex: 0 0 360px;
+  flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -460,7 +460,7 @@ body {
 
 /* ── 패널 영역 (모의 챗봇 창) ── */
 .panel-wrap {
-  flex: 1;
+  flex: 0 0 380px;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -669,7 +669,7 @@ body {
   }
   .main-content { padding: 20px 24px; }
   .hero-wrap { gap: 28px; }
-  .hero-text { flex: 0 0 300px; }
+  .panel-wrap { flex: 0 0 300px; }
 }
 
 @media (max-width: 680px) {
@@ -706,7 +706,7 @@ body {
     gap: 24px;
     align-items: stretch;
   }
-  .hero-text { flex: 0 0 auto; }
+  .panel-wrap { flex: 0 0 auto; }
   .cw-window { min-height: 360px; }
 }
 ```
