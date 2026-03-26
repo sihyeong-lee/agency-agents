@@ -108,6 +108,7 @@
         <h1 class="hero-headline">
           <span class="headline-main">ELVIS</span>
         </h1>
+        <p class="hero-origin">고대 노르드어 <em>Alviss</em> — Al(모든) + Viss(현명한)</p>
         <p class="hero-tagline">ALL + Wise — ER팀을 위한 AI 노동법 플랫폼</p>
         <p class="hero-desc">
           법령, 판례, 행정해석, 내부 사례를 연결해<br>
@@ -359,6 +360,18 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
   color: #111;
+}
+
+.hero-origin {
+  font-size: 12px;
+  color: #aaa;
+  letter-spacing: 0.01em;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.hero-origin em {
+  font-style: italic;
+  color: #888;
 }
 
 .hero-tagline {
