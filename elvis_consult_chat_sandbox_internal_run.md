@@ -71,7 +71,7 @@ const RESULT_NODE_ID = "node-pythonScript-3je3pg8ru8qp1x8826bbe";
       </button>
     </div>
 
-    <div class="input-footer">Elvis는 내부 사례, 법령, 판례, 행정해석을 함께 검토합니다.</div>
+    <div class="input-footer">Elvis는 내부 사례, 법령, 판례, 행정해석을 함께 검토합니다. · AI Canvas 노드 처리 속도로 인해 답변에 5분 이상 소요됩니다.</div>
   </div>
 </div>
 ```
@@ -387,6 +387,16 @@ body {
   color: #5f5f5f;
   font-size: 14px;
   line-height: 1.7;
+}
+
+.starter-notice {
+  font-size: 12.5px;
+  color: #999;
+  background: #f9f9f9;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  padding: 8px 12px;
+  line-height: 1.5;
 }
 
 .suggestions {
@@ -906,6 +916,7 @@ function renderEmptyState() {
           <div class="starter-bubble">
             <div class="starter-title">AI노무사입니다. 무엇을 도와드릴까요?</div>
             <div class="starter-copy">질문을 입력하면 내부 사례, 법령, 판례, 행정해석을 함께 검토해서 답변합니다.</div>
+            <div class="starter-notice">⏱ AI Canvas 노드 처리 속도로 인해 답변에 5분 이상 소요됩니다.</div>
             <div class="suggestions">
               <button type="button" class="suggestion-chip" onclick="window.__useSuggestion && window.__useSuggestion('직장 내 괴롭힘 신고자를 다른 부서로 전보한 게 불리한 처우가 되는지 설명해줘')">불리한 처우 판단</button>
               <button type="button" class="suggestion-chip" onclick="window.__useSuggestion && window.__useSuggestion('사내 음주가 징계사유가 되는지, 내부 유사 사례까지 같이 설명해줘')">사내 음주 징계</button>

@@ -137,73 +137,80 @@
         </div>
       </div>
 
-      <!-- 우측 패널 영역 -->
+      <!-- 우측: 모의 챗봇 창 -->
       <div class="panel-wrap">
+        <div class="cw-window">
 
-        <!-- 현재 사용 가능 카드 -->
-        <div class="panel-card">
-          <div class="panel-header">
-            <span class="panel-live-dot"></span>
-            <span class="panel-title">현재 사용 가능</span>
-          </div>
-          <ul class="panel-list">
-            <li class="panel-item">
-              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>근로기준법·판례 실시간 자문</span>
-            </li>
-            <li class="panel-item">
-              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>내부 징계·조사 사례 비교</span>
-            </li>
-            <li class="panel-item">
-              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>행정해석·고용부 지침 자동 참조</span>
-            </li>
-            <li class="panel-item">
-              <span class="pi-icon"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>대화형 질의로 맥락 유지</span>
-            </li>
-          </ul>
-          <div class="panel-divider"></div>
-          <button type="button" class="panel-link" onclick="window.__navigateMenu && window.__navigateMenu(2)">
-            AI노무사로 이동
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
-
-        <!-- 챗봇 답변 미리보기 카드 -->
-        <div class="preview-card" onclick="window.__navigateMenu && window.__navigateMenu(2)">
-          <div class="preview-label">답변 예시</div>
-
-          <!-- 사용자 질문 -->
-          <div class="preview-user-row">
-            <div class="preview-user-bubble">사내 음주가 징계사유가 될 수 있나요?</div>
+          <!-- 창 헤더 -->
+          <div class="cw-header">
+            <div class="cw-logo">
+              <span class="cw-dot"></span>
+              <span class="cw-name">ELVIS</span>
+            </div>
+            <span class="cw-badge">AI노무사 답변 예시</span>
           </div>
 
-          <!-- AI 답변 -->
-          <div class="preview-ai-row">
-            <div class="preview-avatar">E</div>
-            <div class="preview-ai-bubble">
-              <div class="preview-ai-title">징계 가능, 단 요건 확인 필요</div>
-              <div class="preview-ai-body">취업규칙에 금지 규정이 있고, 업무 방해나 직장 질서 침해가 인정되면 징계 사유가 됩니다. 내부 유사 사례 3건 확인됩니다.</div>
-              <div class="preview-badges">
-                <span class="preview-badge">징계 일반</span>
-                <span class="preview-badge">취업규칙</span>
+          <!-- 메시지 영역 -->
+          <div class="cw-body">
+
+            <div class="cw-row cw-user-row">
+              <div class="cw-bubble cw-user-bubble">사내 음주가 징계사유가 될 수 있나요? 내부 사례도 알려주세요.</div>
+            </div>
+
+            <div class="cw-row cw-ai-row">
+              <div class="cw-av">E</div>
+              <div class="cw-bubble cw-ai-bubble">
+                <div class="cw-ans-title">징계 가능 — 단, 구체적 요건 충족 필요</div>
+                <p class="cw-ans-body">취업규칙에 음주 금지 규정이 있고, 실제 업무 방해·직장 질서 침해가 인정되면 징계 사유가 됩니다. 단순 음주 사실만으로는 부족합니다.</p>
+                <p class="cw-ans-body">내부 유사 사례 3건이 확인됩니다. 2건은 감봉, 1건은 견책이며, 모두 근무 중 음주 또는 동료 불쾌감 유발이 인정된 사례입니다.</p>
+                <div class="cw-tags">
+                  <span class="cw-tag">징계 일반</span>
+                  <span class="cw-tag">취업규칙</span>
+                  <span class="cw-tag">내부 사례 3건</span>
+                </div>
               </div>
             </div>
+
+            <div class="cw-row cw-user-row">
+              <div class="cw-bubble cw-user-bubble">감봉 처분 시 감액 한도가 있나요?</div>
+            </div>
+
+            <div class="cw-row cw-ai-row">
+              <div class="cw-av">E</div>
+              <div class="cw-bubble cw-ai-bubble">
+                <div class="cw-ans-title">1회 감봉액 = 평균임금 1일분 이내</div>
+                <p class="cw-ans-body">근로기준법 제95조에 따라 감봉 1회 금액은 평균임금 1일분의 2분의 1을, 총액은 1임금지급기 임금 총액의 10분의 1을 초과할 수 없습니다.</p>
+                <div class="cw-tags">
+                  <span class="cw-tag">근로기준법 §95</span>
+                  <span class="cw-tag">감봉 한도</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cw-row cw-ai-row">
+              <div class="cw-av">E</div>
+              <div class="cw-bubble cw-ai-bubble cw-typing-bubble">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+
           </div>
 
-          <!-- 타이핑 인디케이터 -->
-          <div class="preview-typing-row">
-            <div class="preview-avatar preview-avatar-sm">E</div>
-            <div class="preview-typing">
-              <span></span><span></span><span></span>
+          <!-- 입력창 -->
+          <div class="cw-footer">
+            <div class="cw-input-bar">
+              <span class="cw-placeholder">직접 질문해보세요...</span>
+              <button class="cw-send-btn" type="button" onclick="window.__navigateMenu && window.__navigateMenu(2)">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"
+                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                  <line x1="12" y1="19" x2="12" y2="5"/>
+                  <polyline points="5 12 12 5 19 12"/>
+                </svg>
+              </button>
             </div>
           </div>
 
-          <div class="preview-cta-hint">클릭해서 직접 질문해보기 →</div>
         </div>
-
       </div>
 
     </div>
@@ -353,24 +360,27 @@ body {
 ──────────────────────────── */
 .main-content {
   flex: 1;
-  overflow-y: auto;
+  min-width: 0;
   display: flex;
-  align-items: center;
+  align-items: stretch;
+  overflow: hidden;
   padding: 24px 36px;
 }
 
 .hero-wrap {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 40px;
-  max-width: 900px;
   width: 100%;
 }
 
 /* ── 히어로 텍스트 ── */
 .hero-text {
-  flex: 1;
+  flex: 0 0 360px;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hero-eyebrow {
@@ -448,142 +458,83 @@ body {
 .btn-cta:hover { background: #333; }
 .btn-cta:active { transform: scale(.97); }
 
-/* ── 패널 영역 ── */
+/* ── 패널 영역 (모의 챗봇 창) ── */
 .panel-wrap {
-  flex-shrink: 0;
-  width: 300px;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
-.panel-card {
+/* 챗봇 창 전체 */
+.cw-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   border: 1px solid #e8e8e8;
   border-radius: 14px;
-  padding: 16px 16px;
   background: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+  box-shadow: 0 2px 16px rgba(0,0,0,.05);
+  overflow: hidden;
 }
 
-.panel-header {
+/* 헤더 */
+.cw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #efefef;
+  background: #fafafa;
+  flex-shrink: 0;
+}
+.cw-logo {
   display: flex;
   align-items: center;
   gap: 7px;
-  margin-bottom: 12px;
 }
-.panel-live-dot {
-  width: 7px;
-  height: 7px;
+.cw-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #22c55e;
   animation: blink 2.2s ease-in-out infinite;
 }
-.panel-title {
-  font-size: 12px;
-  font-weight: 600;
+.cw-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   color: #111;
+}
+.cw-badge {
+  font-size: 11px;
+  color: #999;
   letter-spacing: 0.03em;
 }
 
-.panel-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-.panel-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 12px;
-  color: #444;
-  line-height: 1.5;
-}
-.pi-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #f0fdf4;
-  color: #22c55e;
-  margin-top: 1px;
-}
-
-.panel-divider {
-  height: 1px;
-  background: #f0f0f0;
-  margin-bottom: 16px;
-}
-
-.panel-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  color: #111;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: gap .15s;
-}
-.panel-link:hover { gap: 8px; }
-
-/* ── 챗봇 미리보기 카드 ── */
-.preview-card {
-  border: 1px solid #e8e8e8;
-  border-radius: 14px;
-  padding: 16px;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(0,0,0,.04);
-  cursor: pointer;
-  transition: box-shadow .2s, border-color .2s;
+/* 메시지 영역 */
+.cw-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.preview-card:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,.08);
-  border-color: #d0d0d0;
-}
 
-.preview-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #aaa;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 2px;
-}
-
-/* 사용자 말풍선 */
-.preview-user-row {
+.cw-row {
   display: flex;
-  justify-content: flex-end;
-}
-.preview-user-bubble {
-  background: #1a1a1a;
-  color: #fff;
-  border-radius: 14px 14px 3px 14px;
-  padding: 8px 12px;
-  font-size: 12px;
-  line-height: 1.5;
-  max-width: 85%;
-}
-
-/* AI 답변 */
-.preview-ai-row {
-  display: flex;
-  align-items: flex-start;
   gap: 8px;
 }
-.preview-avatar {
+.cw-user-row {
+  justify-content: flex-end;
+}
+.cw-ai-row {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.cw-av {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -596,34 +547,51 @@ body {
   justify-content: center;
   flex-shrink: 0;
   letter-spacing: 0.02em;
+  margin-top: 2px;
 }
-.preview-ai-bubble {
+
+.cw-bubble {
+  max-width: 80%;
+  padding: 9px 12px;
+  line-height: 1.55;
+  border-radius: 12px;
+  font-size: 12.5px;
+}
+.cw-user-bubble {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 14px 14px 3px 14px;
+}
+.cw-ai-bubble {
   flex: 1;
+  max-width: none;
   background: #fafafa;
   border: 1px solid #ececec;
   border-radius: 3px 14px 14px 14px;
-  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
+  padding: 10px 13px;
 }
-.preview-ai-title {
-  font-size: 12px;
+
+.cw-ans-title {
+  font-size: 12.5px;
   font-weight: 600;
   color: #111;
 }
-.preview-ai-body {
-  font-size: 11.5px;
+.cw-ans-body {
+  font-size: 12px;
   color: #555;
-  line-height: 1.6;
+  line-height: 1.65;
 }
-.preview-badges {
+
+.cw-tags {
   display: flex;
-  gap: 5px;
   flex-wrap: wrap;
+  gap: 4px;
   margin-top: 2px;
 }
-.preview-badge {
+.cw-tag {
   font-size: 10.5px;
   color: #666;
   background: #f2f2f2;
@@ -632,47 +600,64 @@ body {
 }
 
 /* 타이핑 인디케이터 */
-.preview-typing-row {
+.cw-typing-bubble {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  padding: 10px 14px !important;
 }
-.preview-avatar-sm {
-  width: 20px;
-  height: 20px;
-  font-size: 9px;
-}
-.preview-typing {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  padding: 6px 10px;
-  background: #fafafa;
-  border: 1px solid #ececec;
-  border-radius: 3px 12px 12px 12px;
-}
-.preview-typing span {
+.cw-typing-bubble span {
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: #bbb;
-  animation: ptBounce 1.2s infinite ease-in-out;
+  animation: cwBounce 1.2s infinite ease-in-out;
 }
-.preview-typing span:nth-child(2) { animation-delay: .18s; }
-.preview-typing span:nth-child(3) { animation-delay: .36s; }
-@keyframes ptBounce {
+.cw-typing-bubble span:nth-child(2) { animation-delay: .18s; }
+.cw-typing-bubble span:nth-child(3) { animation-delay: .36s; }
+@keyframes cwBounce {
   0%,60%,100% { transform: translateY(0); background: #ccc; }
   30% { transform: translateY(-4px); background: #888; }
 }
 
-.preview-cta-hint {
-  font-size: 11px;
-  color: #aaa;
-  text-align: right;
-  margin-top: 2px;
-  transition: color .15s;
+/* 입력창 */
+.cw-footer {
+  border-top: 1px solid #efefef;
+  padding: 10px 12px;
+  flex-shrink: 0;
 }
-.preview-card:hover .preview-cta-hint { color: #555; }
+.cw-input-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 9px 12px;
+  gap: 8px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.cw-input-bar:hover { background: #eeeeee; }
+.cw-placeholder {
+  font-size: 12.5px;
+  color: #aaa;
+  flex: 1;
+}
+.cw-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #111;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+.cw-send-btn:hover { background: #333; }
 
 /* ────────────────────────────
    반응형
@@ -682,9 +667,9 @@ body {
     width: 180px;
     padding: 20px 10px;
   }
-  .main-content { padding: 32px 28px; }
-  .hero-wrap { gap: 32px; }
-  .panel-wrap { width: 260px; }
+  .main-content { padding: 20px 24px; }
+  .hero-wrap { gap: 28px; }
+  .hero-text { flex: 0 0 300px; }
 }
 
 @media (max-width: 680px) {
@@ -712,15 +697,17 @@ body {
   .sidebar-bottom { display: none; }
 
   .main-content {
-    padding: 28px 20px;
+    padding: 20px 16px;
     align-items: flex-start;
     overflow-y: auto;
   }
   .hero-wrap {
     flex-direction: column;
-    gap: 28px;
+    gap: 24px;
+    align-items: stretch;
   }
-  .panel-wrap { width: 100%; }
+  .hero-text { flex: 0 0 auto; }
+  .cw-window { min-height: 360px; }
 }
 ```
 
