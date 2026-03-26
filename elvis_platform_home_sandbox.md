@@ -217,11 +217,13 @@
 
 html, body {
   height: 100%;
+  width: 100%;
   background: #fff;
 }
 
 body {
   font-family: 'Inter', 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-size: 14px;
   color: #111;
   -webkit-font-smoothing: antialiased;
 }
@@ -230,6 +232,7 @@ body {
 .elvis-home {
   display: flex;
   height: 100dvh;
+  width: 100%;
   overflow: hidden;
 }
 

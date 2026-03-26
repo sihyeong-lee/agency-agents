@@ -79,24 +79,30 @@ const RESULT_NODE_ID = "node-pythonScript-3je3pg8ru8qp1x8826bbe";
 ## 4. CSS
 
 ```css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   height: 100%;
+  width: 100%;
   background: #fff;
 }
 
 body {
   font-family: 'Inter', 'Segoe UI', 'Noto Sans KR', sans-serif;
+  font-size: 14px;
   color: #111;
   -webkit-font-smoothing: antialiased;
 }
 
 .elvis-chat-page {
   height: 100dvh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background: #fff;
+  overflow: hidden;
 }
 
 .header {
@@ -118,7 +124,7 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .header-title {
