@@ -230,10 +230,9 @@ body {
 
 /* ── 전체 레이아웃 ── */
 .elvis-home {
+  position: fixed;
+  inset: 0;
   display: flex;
-  height: 100dvh;
-  width: 100%;
-  overflow: hidden;
 }
 
 /* ────────────────────────────

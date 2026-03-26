@@ -97,12 +97,11 @@ body {
 }
 
 .elvis-chat-page {
-  height: 100dvh;
-  width: 100%;
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
   background: #fff;
-  overflow: hidden;
 }
 
 .header {
