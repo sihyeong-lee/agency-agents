@@ -137,77 +137,34 @@
         </div>
       </div>
 
-      <!-- 우측: 모의 챗봇 창 -->
+      <!-- 우측: 라이브 데모 패널 -->
       <div class="panel-wrap">
-        <div class="cw-window">
+        <div class="demo-panel">
 
-          <!-- 창 헤더 -->
-          <div class="cw-header">
-            <div class="cw-logo">
-              <span class="cw-dot"></span>
-              <span class="cw-name">ELVIS</span>
+          <div class="demo-top-label">실시간 답변 예시</div>
+
+          <div class="demo-scene" id="demoScene">
+            <div class="demo-q-prefix">Q.</div>
+            <p class="demo-question" id="demoQuestion"></p>
+
+            <div class="demo-answer-wrap" id="demoAnswerWrap">
+              <p class="demo-answer" id="demoAnswer"></p>
+              <p class="demo-citation" id="demoCitation"></p>
             </div>
-            <span class="cw-badge">AI노무사 답변 예시</span>
           </div>
 
-          <!-- 메시지 영역 -->
-          <div class="cw-body">
-
-            <div class="cw-row cw-user-row">
-              <div class="cw-bubble cw-user-bubble">사내 음주가 징계사유가 될 수 있나요? 내부 사례도 알려주세요.</div>
+          <div class="demo-footer">
+            <div class="demo-dots" id="demoDots">
+              <span class="demo-dot is-active"></span>
+              <span class="demo-dot"></span>
+              <span class="demo-dot"></span>
+              <span class="demo-dot"></span>
             </div>
-
-            <div class="cw-row cw-ai-row">
-              <div class="cw-av">E</div>
-              <div class="cw-bubble cw-ai-bubble">
-                <div class="cw-ans-title">징계 가능 — 단, 구체적 요건 충족 필요</div>
-                <p class="cw-ans-body">취업규칙에 음주 금지 규정이 있고, 실제 업무 방해·직장 질서 침해가 인정되면 징계 사유가 됩니다. 단순 음주 사실만으로는 부족합니다.</p>
-                <p class="cw-ans-body">내부 유사 사례 3건이 확인됩니다. 2건은 감봉, 1건은 견책이며, 모두 근무 중 음주 또는 동료 불쾌감 유발이 인정된 사례입니다.</p>
-                <div class="cw-tags">
-                  <span class="cw-tag">징계 일반</span>
-                  <span class="cw-tag">취업규칙</span>
-                  <span class="cw-tag">내부 사례 3건</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="cw-row cw-user-row">
-              <div class="cw-bubble cw-user-bubble">감봉 처분 시 감액 한도가 있나요?</div>
-            </div>
-
-            <div class="cw-row cw-ai-row">
-              <div class="cw-av">E</div>
-              <div class="cw-bubble cw-ai-bubble">
-                <div class="cw-ans-title">1회 감봉액 = 평균임금 1일분 이내</div>
-                <p class="cw-ans-body">근로기준법 제95조에 따라 감봉 1회 금액은 평균임금 1일분의 2분의 1을, 총액은 1임금지급기 임금 총액의 10분의 1을 초과할 수 없습니다.</p>
-                <div class="cw-tags">
-                  <span class="cw-tag">근로기준법 §95</span>
-                  <span class="cw-tag">감봉 한도</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="cw-row cw-ai-row">
-              <div class="cw-av">E</div>
-              <div class="cw-bubble cw-ai-bubble cw-typing-bubble">
-                <span></span><span></span><span></span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- 입력창 -->
-          <div class="cw-footer">
-            <div class="cw-input-bar">
-              <span class="cw-placeholder">직접 질문해보세요...</span>
-              <button class="cw-send-btn" type="button" onclick="window.__navigateMenu && window.__navigateMenu(2)">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"
-                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                  <line x1="12" y1="19" x2="12" y2="5"/>
-                  <polyline points="5 12 12 5 19 12"/>
-                </svg>
-              </button>
-            </div>
+            <button
+              type="button"
+              class="demo-cta"
+              onclick="window.__navigateMenu && window.__navigateMenu(2)"
+            >직접 질문하기 →</button>
           </div>
 
         </div>
@@ -466,8 +423,8 @@ body {
   flex-direction: column;
 }
 
-/* 챗봇 창 전체 */
-.cw-window {
+/* ── 라이브 데모 패널 ── */
+.demo-panel {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -475,189 +432,114 @@ body {
   border-radius: 14px;
   background: #fff;
   box-shadow: 0 2px 16px rgba(0,0,0,.05);
+  padding: 28px 28px 20px;
   overflow: hidden;
 }
 
-/* 헤더 */
-.cw-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 1px solid #efefef;
-  background: #fafafa;
+.demo-top-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ccc;
+  margin-bottom: 32px;
   flex-shrink: 0;
 }
-.cw-logo {
+
+.demo-scene {
+  flex: 1;
   display: flex;
-  align-items: center;
-  gap: 7px;
+  flex-direction: column;
+  gap: 0;
+  opacity: 1;
+  transition: opacity .45s ease;
 }
-.cw-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
-  animation: blink 2.2s ease-in-out infinite;
-}
-.cw-name {
-  font-size: 13px;
+.demo-scene.fading { opacity: 0; }
+
+.demo-q-prefix {
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #111;
-}
-.cw-badge {
-  font-size: 11px;
-  color: #999;
-  letter-spacing: 0.03em;
+  color: #22c55e;
+  margin-bottom: 10px;
 }
 
-/* 메시지 영역 */
-.cw-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px 14px;
+.demo-question {
+  font-size: 17px;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.6;
+  min-height: 56px;
+  margin: 0 0 24px;
+}
+
+.demo-answer-wrap {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.demo-answer-wrap.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.cw-row {
-  display: flex;
-  gap: 8px;
-}
-.cw-user-row {
-  justify-content: flex-end;
-}
-.cw-ai-row {
-  justify-content: flex-start;
-  align-items: flex-start;
+.demo-answer {
+  border-left: 3px solid #22c55e;
+  padding: 13px 16px;
+  background: #f8faf8;
+  border-radius: 0 8px 8px 0;
+  font-size: 13.5px;
+  color: #333;
+  line-height: 1.75;
+  margin: 0;
 }
 
-.cw-av {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #111;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.demo-citation {
+  font-size: 11.5px;
+  color: #bbb;
   letter-spacing: 0.02em;
-  margin-top: 2px;
+  margin: 0;
 }
 
-.cw-bubble {
-  max-width: 80%;
-  padding: 9px 12px;
-  line-height: 1.55;
-  border-radius: 12px;
-  font-size: 12.5px;
-}
-.cw-user-bubble {
-  background: #1a1a1a;
-  color: #fff;
-  border-radius: 14px 14px 3px 14px;
-}
-.cw-ai-bubble {
-  flex: 1;
-  max-width: none;
-  background: #fafafa;
-  border: 1px solid #ececec;
-  border-radius: 3px 14px 14px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 10px 13px;
-}
-
-.cw-ans-title {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #111;
-}
-.cw-ans-body {
-  font-size: 12px;
-  color: #555;
-  line-height: 1.65;
-}
-
-.cw-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 2px;
-}
-.cw-tag {
-  font-size: 10.5px;
-  color: #666;
-  background: #f2f2f2;
-  border-radius: 999px;
-  padding: 2px 8px;
-}
-
-/* 타이핑 인디케이터 */
-.cw-typing-bubble {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 10px 14px !important;
-}
-.cw-typing-bubble span {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #bbb;
-  animation: cwBounce 1.2s infinite ease-in-out;
-}
-.cw-typing-bubble span:nth-child(2) { animation-delay: .18s; }
-.cw-typing-bubble span:nth-child(3) { animation-delay: .36s; }
-@keyframes cwBounce {
-  0%,60%,100% { transform: translateY(0); background: #ccc; }
-  30% { transform: translateY(-4px); background: #888; }
-}
-
-/* 입력창 */
-.cw-footer {
-  border-top: 1px solid #efefef;
-  padding: 10px 12px;
-  flex-shrink: 0;
-}
-.cw-input-bar {
+.demo-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f5f5f5;
-  border-radius: 10px;
-  padding: 9px 12px;
-  gap: 8px;
-  cursor: pointer;
-  transition: background .15s;
+  margin-top: 24px;
+  flex-shrink: 0;
 }
-.cw-input-bar:hover { background: #eeeeee; }
-.cw-placeholder {
-  font-size: 12.5px;
-  color: #aaa;
-  flex: 1;
-}
-.cw-send-btn {
+
+.demo-dots {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: #111;
+  gap: 6px;
+}
+.demo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  transition: background .3s;
+}
+.demo-dot.is-active { background: #22c55e; }
+
+.demo-cta {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #111;
+  background: none;
   border: none;
   cursor: pointer;
-  color: #fff;
-  flex-shrink: 0;
-  transition: background .15s;
+  padding: 0;
+  letter-spacing: 0.01em;
+  opacity: .6;
+  transition: opacity .15s;
 }
-.cw-send-btn:hover { background: #333; }
+.demo-cta:hover { opacity: 1; }
 
 /* ────────────────────────────
    반응형
@@ -707,7 +589,7 @@ body {
     align-items: stretch;
   }
   .panel-wrap { flex: 0 0 auto; }
-  .cw-window { min-height: 360px; }
+  .demo-panel { min-height: 360px; }
 }
 ```
 
@@ -759,6 +641,105 @@ body {
   }
 
   window.__navigateMenu = navigateMenu;
+})();
+
+// ── 라이브 데모 타이프라이터 ────────────────────────────────────
+(() => {
+  const SCENARIOS = [
+    {
+      q: "퇴직금을 1년 이상 근무했는데 지급하지 않으면 어떻게 되나요?",
+      a: "퇴직급여법 위반으로 3년 이하 징역 또는 2천만원 이하 벌금이 부과됩니다. 퇴직일로부터 14일 이내 미지급 시 지연이자(연 20%)도 청구할 수 있습니다.",
+      cite: "근거: 근로자퇴직급여보장법 제9조, 제44조"
+    },
+    {
+      q: "사내 음주 행위가 징계사유가 될 수 있나요?",
+      a: "취업규칙에 금지 규정이 있고 업무 방해·직장 질서 침해가 인정되면 징계 가능합니다. 단순 음주 사실만으로는 근거가 부족하며 구체적 행위 입증이 필요합니다.",
+      cite: "근거: 대법원 2000다18127, 근로기준법 제23조"
+    },
+    {
+      q: "육아휴직 후 복직을 거부하거나 다른 직무로 전환하면 위법인가요?",
+      a: "원직 복직이 원칙입니다. 정당한 사유 없는 복직 거부나 불이익 처우는 남녀고용평등법 위반으로 500만원 이하 벌금에 해당합니다.",
+      cite: "근거: 남녀고용평등법 제19조, 제19조의4"
+    },
+    {
+      q: "징계 감봉 처분 시 임금 감액 한도가 있나요?",
+      a: "1회 감봉액은 평균임금 1일분의 1/2 이내, 총액은 1임금지급기 임금 총액의 10분의 1 이내로 법으로 제한됩니다.",
+      cite: "근거: 근로기준법 제95조"
+    }
+  ];
+
+  const CHAR_SPEED = 38; // ms per character
+  const ANSWER_DELAY = 900; // pause before answer appears
+  const READ_TIME = 5500; // reading time before next scenario
+  const FADE_DURATION = 450; // ms — must match CSS transition
+
+  let current = 0;
+  let timer = null;
+
+  function typeText(el, text, speed, done) {
+    el.textContent = '';
+    let i = 0;
+    function tick() {
+      if (i < text.length) {
+        el.textContent += text[i++];
+        timer = setTimeout(tick, speed);
+      } else {
+        if (done) done();
+      }
+    }
+    tick();
+  }
+
+  function updateDots(idx) {
+    document.querySelectorAll('.demo-dot').forEach((d, i) => {
+      d.classList.toggle('is-active', i === idx);
+    });
+  }
+
+  function showScenario(idx) {
+    const scene = SCENARIOS[idx];
+    const sceneEl  = document.getElementById('demoScene');
+    const qEl      = document.getElementById('demoQuestion');
+    const awEl     = document.getElementById('demoAnswerWrap');
+    const aEl      = document.getElementById('demoAnswer');
+    const cEl      = document.getElementById('demoCitation');
+    if (!sceneEl || !qEl) return;
+
+    sceneEl.classList.add('fading');
+
+    timer = setTimeout(() => {
+      awEl.classList.remove('visible');
+      qEl.textContent = '';
+      aEl.textContent = '';
+      cEl.textContent = '';
+      sceneEl.classList.remove('fading');
+      updateDots(idx);
+
+      typeText(qEl, scene.q, CHAR_SPEED, () => {
+        timer = setTimeout(() => {
+          aEl.textContent = scene.a;
+          cEl.textContent = scene.cite;
+          awEl.classList.add('visible');
+          timer = setTimeout(() => {
+            current = (current + 1) % SCENARIOS.length;
+            showScenario(current);
+          }, READ_TIME);
+        }, ANSWER_DELAY);
+      });
+    }, FADE_DURATION);
+  }
+
+  function init() {
+    if (document.getElementById('demoScene')) {
+      showScenario(0);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 ```
 
